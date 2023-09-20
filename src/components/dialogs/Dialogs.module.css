@@ -1,0 +1,26 @@
+.content {
+    grid-area: c;
+    background-color: #abfff1;
+}
+
+.dialogs {
+    display: flex;
+    flex-direction: row;
+}
+
+.dialogsItems {
+    padding: 20px;
+    flex-basis: 10%;
+    flex-grow: 1;
+    border-right: 1px solid black;
+
+}
+
+.dialog {
+
+}
+
+.massage {
+    flex-basis: 60%;
+    flex-grow: 1;
+}

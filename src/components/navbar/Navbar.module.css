@@ -1,0 +1,16 @@
+.nav {
+    grid-area: n;
+    height: calc(100vh - 60px);
+    background-color: #5d77bb;
+    padding: 20px;
+}
+
+.item a {
+    text-decoration: none;
+    color: #abfff1;
+}
+
+.activeLinc {
+    color: aliceblue;
+    text-decoration: none;
+}
