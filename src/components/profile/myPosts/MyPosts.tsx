@@ -1,10 +1,13 @@
 import React from 'react';
 import { Post } from './post/Post';
+import classes from "./MyPosts.module.css";
 
 export const MyPosts = () => {
     return (
-        <div>
-            <textarea></textarea>
+        <div className={classes.postWrapper}>
+            <div>
+                <textarea></textarea>
+            </div>
             <button>New post</button>
             <Post
                 name={'Murkiss'}
