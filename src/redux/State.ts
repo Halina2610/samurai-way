@@ -120,3 +120,16 @@ export const state: StateType = {
 
 }
 
+export const addPost = (postMessage: string) => {
+   let newPost: PostsPropsType = {
+       id: uuidv4(),
+       name: "Name",
+       post: postMessage,
+       title: "Title",
+       img: '',
+       likeCount: 0
+
+   }
+
+   state.profilePage.posts.push(newPost)
+}

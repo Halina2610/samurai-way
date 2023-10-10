@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css';
 import { Message } from './message/Message';
 import {DialogItem} from "./dialogItem/DiologItem";
 import {messagesPageType} from "../../redux/State";
+import MessageSender from "./message-sender/MessageSender";
 
 type DialogsPropsType = {
     messages: messagesPageType;
@@ -21,6 +22,11 @@ export const Dialogs = (props: DialogsPropsType) => {
                     <Message key={m.id} message={m.message} />
                 ))}
             </div>
+            <div>
+                <MessageSender M={Message} />
+            </div>
+
+
         </div>
     );
 };

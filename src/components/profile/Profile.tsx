@@ -6,6 +6,7 @@ import {PostsPropsType} from "../../redux/State";
 
 type ProfilePropsType = {
     posts: PostsPropsType[]
+    addPost: (postMessage: string) => void
 };
 export const Profile = (props: ProfilePropsType) => {
     return (
@@ -19,7 +20,7 @@ export const Profile = (props: ProfilePropsType) => {
                          birth={'26 Oct. 1992'}
                          hrefSite={"http://www.exemple.com"}
                          nameWebSite={'exemple.com'}/>
-            <MyPosts postData={props.posts} />
+            <MyPosts postData={props.posts} addPost={props.addPost} />
         </div>
     );
 };

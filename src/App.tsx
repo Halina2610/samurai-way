@@ -13,6 +13,7 @@ import {StateType} from "./redux/State";
 
 type AppProps = {
    state: StateType
+    addPost: (postMessage: string) => void
 };
 
 function App(props: AppProps) {
@@ -23,15 +24,17 @@ function App(props: AppProps) {
                 <Navbar sitebar={props.state.siteBar} />
                 <div className="app-wrapper-content">
                     <Switch>
-                        <Route path="/profile">
-                            <Profile posts={props.state.profilePage.posts} />
-                        </Route>
-                        <Route path="/dialogs">
+                        <Route path="/profile" render={() => (
+                            <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>
+                        )} />
+
+                        <Route path="/dialogs" render={() => (
                             <Dialogs messages={props.state.messagesPage} />
-                        </Route>
-                        <Route path="/news" component={News} />
-                        <Route path="/music" component={Music} />
-                        <Route path="/settings" component={Settings} />
+                        )} />
+
+                        <Route path="/news" render={News} />
+                        <Route path="/music" render={Music} />
+                        <Route path="/settings" render={Settings} />
                     </Switch>
                 </div>
             </div>
