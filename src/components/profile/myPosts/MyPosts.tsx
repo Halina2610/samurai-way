@@ -1,27 +1,31 @@
 import React from 'react';
-import {Post} from './post/Post';
-import classes from "./MyPosts.module.css";
-import {postData} from "../../../index";
+import { Post } from './post/Post';
+import classes from './MyPosts.module.css';
+import {Button} from "../../ common/Button";
+import {PostsPropsType} from "../../../redux/State";
 
-export const MyPosts = () => {
+type MyPostsPropsType = {
+    postData: PostsPropsType[];
+};
 
+export const MyPosts = (props: MyPostsPropsType) => {
     return (
         <div className={classes.postWrapper}>
-            <div>
+            <div className={classes.blockAddPosts}>
                 <textarea></textarea>
+            <Button onClick={()=> {}} name={'add post'}/>
             </div>
-            <button>New post</button>
-            {postData.map(p => {
-               return <Post
-                    name={p.name}
-                    title={p.title}
-                    post={p.post}
-                    likeCount={p.likeCount}
-                    img={p.img}
-                />
+            {props.postData.map((p) => {
+                return (
+                    <Post
+                        name={p.name}
+                        title={p.title}
+                        post={p.post}
+                        likeCount={p.likeCount}
+                        img={p.img}
+                    />
+                );
             })}
         </div>
     );
 };
-
-

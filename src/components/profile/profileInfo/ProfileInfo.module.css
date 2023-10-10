@@ -1,13 +1,15 @@
 .img {
     width: 100%;
     height: 300px;
+    border-radius: 5px;
+
 }
 
 .avatar {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 20px;
-    background-color: aliceblue;
+    background-color: #dfcdff;
 }
 
 .avatar div img {

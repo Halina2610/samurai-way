@@ -1,30 +1,33 @@
 import React from 'react';
 import classes from './Navbar.module.css';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import {siteBarPropsType} from "../../redux/State";
 
-interface MenuItem {
-    path: string;
-    label: string;
-}
 
-export const Navbar = () => {
-    const menuItems: MenuItem[] = [
-        {path: '/profile', label: 'Profile'},
-        {path: '/dialogs', label: 'Message'},
-        {path: '/news', label: 'News'},
-        {path: '/music', label: 'Music'},
-        {path: '/settings', label: 'Settings'}
-    ];
+type NavbarPropsType = {
+    sitebar: siteBarPropsType;
+};
 
+export const Navbar: React.FC<NavbarPropsType> = (props: NavbarPropsType) => {
     return (
-        <nav className={classes.nav}>
-            {menuItems.map((item) => (
-                <div className={classes.item}>
-                    <NavLink to={item.path} activeClassName={classes.activeLinc}>
-                        {item.label}
-                    </NavLink>
-                </div>
-            ))}
-        </nav>
+        <div className={classes.siteBar}>
+            <nav className={classes.nav}>
+                {props.sitebar.menuItems.map((item, index) => (
+                    <div key={index} className={classes.item}>
+                        <NavLink to={item.path} activeClassName={classes.activeLink}>
+                            {item.label}
+                        </NavLink>
+                    </div>
+                ))}
+            </nav>
+            <div>
+                {props.sitebar.friends.map((friend) => (
+                    <div key={friend.id} className={classes.friends}>
+                        <img src={friend.avatar} alt={friend.name} />
+                        <span>{friend.name}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };

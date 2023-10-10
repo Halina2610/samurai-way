@@ -1,3 +1,7 @@
 .postWrapper {
     padding: 20px;
 }
+
+.blockAddPosts {
+    display: flex;
+}
