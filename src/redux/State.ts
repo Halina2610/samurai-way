@@ -1,5 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
-import exp from "constants";
+import {rerenderEntireTree} from "../render";
 
 export type MessagesPropsType = {
     id: string
@@ -123,13 +123,14 @@ export const state: StateType = {
 export const addPost = (postMessage: string) => {
    let newPost: PostsPropsType = {
        id: uuidv4(),
-       name: "Name",
+       name: "Halina Kls",
        post: postMessage,
-       title: "Title",
-       img: '',
+       title: "New post",
+       img: "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
        likeCount: 0
 
    }
 
    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
