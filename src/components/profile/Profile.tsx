@@ -2,11 +2,12 @@ import React from 'react';
 import classes from './Profile.module.css';
 import {MyPosts} from './myPosts/MyPosts';
 import {ProfileInfo} from "./profileInfo/ProfileInfo";
-import {PostsPropsType} from "../../redux/State";
+import {PostsPropsType, updateNewPostText} from "../../redux/State";
 
 type ProfilePropsType = {
     posts: PostsPropsType[]
     addPost: (postMessage: string) => void
+    updateNewPostText: (newPost:PostsPropsType) => void
 };
 export const Profile = (props: ProfilePropsType) => {
     return (
@@ -20,7 +21,7 @@ export const Profile = (props: ProfilePropsType) => {
                          birth={'26 Oct. 1992'}
                          hrefSite={"http://www.exemple.com"}
                          nameWebSite={'exemple.com'}/>
-            <MyPosts postData={props.posts} addPost={props.addPost} />
+            <MyPosts postData={props.posts} addPost={props.addPost} updateNewPostText={updateNewPostText}/>
         </div>
     );
 };

@@ -8,12 +8,13 @@ import { Dialogs } from './components/dialogs/Dialogs';
 import { News } from './components/news/News';
 import { Music } from './components/music/Music';
 import { Settings } from './components/settings/Settings';
-import {StateType} from "./redux/State";
+import {PostsPropsType, StateType, updateNewPostText} from "./redux/State";
 
 
 type AppProps = {
    state: StateType
     addPost: (postMessage: string) => void
+    updateNewPostText: (newPost: PostsPropsType) => void
 };
 
 function App(props: AppProps) {
@@ -25,7 +26,7 @@ function App(props: AppProps) {
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/profile" render={() => (
-                            <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>
+                            <Profile posts={props.state.profilePage.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
                         )} />
 
                         <Route path="/dialogs" render={() => (
