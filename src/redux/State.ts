@@ -1,5 +1,9 @@
 import {v4 as uuidv4} from 'uuid';
-import {rerenderEntireTree} from "../render";
+
+let rerenderEntireTree = (state: StateType) => {
+
+}
+
 
 export type MessagesPropsType = {
     id: string
@@ -14,7 +18,7 @@ export type MessagesPageType = {
     messages: MessagesPropsType[];
     dialogs: UsersPropsType[];
 };
- export type PostsPropsType = {
+export type PostsPropsType = {
     id: string
     name: string
     title: string
@@ -22,7 +26,7 @@ export type MessagesPageType = {
     likeCount: number
     img: string
 }
- type FriendsPropsType = {
+type FriendsPropsType = {
     id: string
     name: string
     avatar: string
@@ -118,24 +122,29 @@ export const state: StateType = {
 }
 
 export const addPost = () => {
-   let newPost: PostsPropsType = {
-       id: uuidv4(),
-       name: "Halina Kls",
-       post: state.profilePage.newPostText,
-       title: "New post",
-       img: "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
-       likeCount: 0
+    let newPost: PostsPropsType = {
+        id: uuidv4(),
+        name: "Halina Kls",
+        post: state.profilePage.newPostText,
+        title: "New post",
+        img: "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
+        likeCount: 0
 
-   }
+    }
 
-   state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText= ''
+    state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
 
 
 export const updateNewPostText = (newPost: string) => {
-     state.profilePage.newPostText = newPost
+    state.profilePage.newPostText = newPost
     rerenderEntireTree(state)
 
+}
+
+
+export const subscribe = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer;
 }
