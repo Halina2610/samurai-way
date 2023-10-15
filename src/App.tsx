@@ -14,7 +14,7 @@ import {PostsPropsType, StateType, updateNewPostText} from "./redux/State";
 type AppProps = {
    state: StateType
     addPost: (postMessage: string) => void
-    updateNewPostText: (newPost: PostsPropsType) => void
+    updateNewPostText: (newPost: string) => void
 };
 
 function App(props: AppProps) {
@@ -26,7 +26,7 @@ function App(props: AppProps) {
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/profile" render={() => (
-                            <Profile posts={props.state.profilePage.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
+                            <Profile profilePage ={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
                         )} />
 
                         <Route path="/dialogs" render={() => (

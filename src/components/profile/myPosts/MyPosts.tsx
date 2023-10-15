@@ -5,9 +5,10 @@ import { PostsPropsType } from '../../../redux/State';
 import {Button} from "../../ common/Button";
 
 type MyPostsPropsType = {
-    postData: PostsPropsType[];
-    addPost: (postMessage: string) => void;
-    updateNewPostText: (newPost: string) => void;
+    postData: PostsPropsType[]
+    addPost: (postMessage: string) => void
+    updateNewPostText: (newPost: string) => void
+    newPostText:  string
 };
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -15,23 +16,22 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addPostHandler = () => {
         if (newPostElement.current && newPostElement.current.value) {
-            const newPost = newPostElement.current.value;
-            props.addPost(newPost);
-            newPostElement.current.value = '';
+            const post = newPostElement.current.value;
+            props.addPost(post);
         }
     };
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            const text = newPostElement.current.value;
-            props.updateNewPostText(text);
+            const newPost = newPostElement.current.value;
+            props.updateNewPostText(newPost);
         }
     };
 
     return (
         <div className={classes.postWrapper}>
             <div className={classes.blockAddPosts}>
-                <textarea onChange={onPostChange} ref={newPostElement} {/*value={props.newPost}*/}/>
+                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
                 <Button onClick={addPostHandler} name={'add post'} />
             </div>
             {props.postData.map((p) => (

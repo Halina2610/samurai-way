@@ -8,7 +8,7 @@ import {addPost, StateType, updateNewPostText} from "./redux/State";
 export let rerenderEntireTree = (state: StateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+            <App state={state} addPost={addPost} updateNewPostText={updateNewPostText} />
         </BrowserRouter>,
         document.getElementById('root')
     )

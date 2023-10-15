@@ -1,6 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
 import {rerenderEntireTree} from "../render";
-import {createStore} from "redux";
 
 export type MessagesPropsType = {
     id: string
@@ -40,7 +39,7 @@ export type  MenuItemType = {
 
 export type ProfilePageType = {
     posts: PostsPropsType[]
-    newPost: string
+    newPostText: string
 }
 export type StateType = {
     messagesPage: MessagesPageType
@@ -111,17 +110,18 @@ export const state: StateType = {
                 likeCount: 7,
                 img: 'https://sneg.top/uploads/posts/2023-06/1687572964_sneg-top-p-avi-dlya-standoffa-koti-instagram-7.jpg'
             },
+
         ],
-        newPost: "postMessage",
+        newPostText: "it-kamasutra",
     }
 
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
    let newPost: PostsPropsType = {
        id: uuidv4(),
        name: "Halina Kls",
-       post: postMessage,
+       post: state.profilePage.newPostText,
        title: "New post",
        img: "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
        likeCount: 0
@@ -129,11 +129,13 @@ export const addPost = (postMessage: string) => {
    }
 
    state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText= ''
     rerenderEntireTree(state)
 }
 
 
 export const updateNewPostText = (newPost: string) => {
-     state.profilePage.newPost = newPost
+     state.profilePage.newPostText = newPost
     rerenderEntireTree(state)
+
 }
