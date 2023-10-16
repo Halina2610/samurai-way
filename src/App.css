@@ -4,7 +4,7 @@
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
     gap: 10px;
-    max-width: 1280px;
+    max-width: 100vw;
     max-height: 100vh;
     margin: 0 auto;
 }

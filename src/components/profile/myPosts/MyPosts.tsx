@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 import { Post } from './post/Post';
 import classes from './MyPosts.module.css';
-import { PostsPropsType } from '../../../redux/store';
+import {Action, PostsPropsType} from '../../../redux/store';
 import {Button} from "../../ common/Button";
 
 type MyPostsPropsType = {
     postData: PostsPropsType[]
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newPost: string) => void
+    dispatch: (action: Action) => void
     newPostText:  string
 };
 
@@ -17,14 +16,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
     const addPostHandler = () => {
         if (newPostElement.current && newPostElement.current.value) {
             const post = newPostElement.current.value;
-            props.addPost(post);
+            props.dispatch({type: "ADD-POST"});
         }
     };
 
     const onPostChange = () => {
         if (newPostElement.current) {
             const newPost = newPostElement.current.value;
-            props.updateNewPostText(newPost);
+            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newPost});
         }
     };
 

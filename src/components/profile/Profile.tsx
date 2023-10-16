@@ -2,12 +2,11 @@ import React from 'react';
 import classes from './Profile.module.css';
 import {MyPosts} from './myPosts/MyPosts';
 import {ProfileInfo} from "./profileInfo/ProfileInfo";
-import {ProfilePageType} from "../../redux/store";
+import {Action, ProfilePageType} from "../../redux/store";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newPost: string) => void
+    dispatch: (action: Action) => void
 };
 
 export const Profile = (props: ProfilePropsType) => {
@@ -22,7 +21,7 @@ export const Profile = (props: ProfilePropsType) => {
                          birth={'26 Oct. 1992'}
                          hrefSite={"http://www.exemple.com"}
                          nameWebSite={'exemple.com'}/>
-            <MyPosts postData={props.profilePage.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText} newPostText={props.profilePage.newPostText}/>
+            <MyPosts postData={props.profilePage.posts} dispatch={props.dispatch}  newPostText={props.profilePage.newPostText}/>
         </div>
     );
 };

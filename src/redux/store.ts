@@ -70,35 +70,37 @@ let store: StoreType = {
         }
 
     },
-    getState () {
-        return this._state
-    },
     _callSubscriber(state: StateType) {
         console.log("State changed")
     },
-    addPost (){
-        let newPost: PostsPropsType = {
-            id: uuidv4(),
-            name: "Halina Kls",
-            post: this._state.profilePage.newPostText,
-            title: "New post",
-            img: "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
-            likeCount: 0
-
-        }
-
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
+    getState () {
+        return this._state
     },
-    updateNewPostText (newPost: string) {
-        this._state.profilePage.newPostText = newPost
-        this._callSubscriber(this._state)
-    },
-
     subscribe (observer: (state: StateType) => void) {
         this._callSubscriber = observer;
     },
+
+    dispatch(action: Action) {
+        if (action.type === "ADD-POST") {
+            let newPost: PostsPropsType = {
+                id: uuidv4(),
+                name: "Halina Kls",
+                post: this._state.profilePage.newPostText,
+                title: "New post",
+                img:
+                    "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
+                likeCount: 0,
+            };
+
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = "";
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.newPost;
+            this._callSubscriber(this._state);
+        }
+    },
+
 }
 
 
@@ -152,12 +154,15 @@ export type StateType = {
 
 export interface StoreType {
     _state: StateType;
-    _callSubscriber: (state: StateType) => void
-    addPost: () => void
-    updateNewPostText: (newPost: string) => void
-    subscribe: (observer: (state: StateType) => void) => void
-    getState: () => StateType
+    _callSubscriber: (state: StateType) => void;
+    subscribe: (observer: (state: StateType) => void) => void;
+    getState: () => StateType;
+    dispatch: (action: Action) => void;
 }
+
+export type Action =
+    | { type: "ADD-POST" }
+    | { type: "UPDATE-NEW-POST-TEXT"; newPost: string };
 
 export default store;
 
