@@ -8,11 +8,11 @@ import { Dialogs } from './components/dialogs/Dialogs';
 import { News } from './components/news/News';
 import { Music } from './components/music/Music';
 import { Settings } from './components/settings/Settings';
-import {PostsPropsType, StateType, updateNewPostText} from "./redux/State";
+import {StateType} from "./redux/store";
 
 
 type AppProps = {
-   state: StateType
+    state: StateType
     addPost: (postMessage: string) => void
     updateNewPostText: (newPost: string) => void
 };

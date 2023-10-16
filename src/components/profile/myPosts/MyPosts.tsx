@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Post } from './post/Post';
 import classes from './MyPosts.module.css';
-import { PostsPropsType } from '../../../redux/State';
+import { PostsPropsType } from '../../../redux/store';
 import {Button} from "../../ common/Button";
 
 type MyPostsPropsType = {
