@@ -12,9 +12,21 @@ let store: StoreType = {
                 {path: '/settings', label: 'Settings'}
             ],
             friends: [
-                {id: uuidv4(), name: 'Maks', avatar: "https://pixelbox.ru/wp-content/uploads/2022/08/avatar-boy-telegram-pixelbox.ru-76.jpg"},
-                {id: uuidv4(), name: 'Sasha', avatar: "https://yt3.ggpht.com/ytc/AMLnZu-4tKpIa5HR4HHwUuJPAYDMtPIRq8ctCLcJGZDD=s900-c-k-c0x00ffffff-no-rj"},
-                {id: uuidv4(), name: 'Kolya', avatar: "https://pixelbox.ru/wp-content/uploads/2021/09/avatar-boys-vk-60-scaled.jpg"},
+                {
+                    id: uuidv4(),
+                    name: 'Maks',
+                    avatar: "https://pixelbox.ru/wp-content/uploads/2022/08/avatar-boy-telegram-pixelbox.ru-76.jpg"
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Sasha',
+                    avatar: "https://yt3.ggpht.com/ytc/AMLnZu-4tKpIa5HR4HHwUuJPAYDMtPIRq8ctCLcJGZDD=s900-c-k-c0x00ffffff-no-rj"
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Kolya',
+                    avatar: "https://pixelbox.ru/wp-content/uploads/2021/09/avatar-boys-vk-60-scaled.jpg"
+                },
             ],
         },
         messagesPage: {
@@ -24,6 +36,8 @@ let store: StoreType = {
                 {id: uuidv4(), message: 'I\'ve been doing well, thanks. How about you?'},
                 {id: uuidv4(), message: 'Not too bad, thanks for asking. What have you been up to lately?'},
             ],
+            newMessageText: "",
+
             dialogs: [
                 {id: uuidv4(), name: 'Murkiss'},
                 {id: uuidv4(), name: 'Miu'},
@@ -73,15 +87,16 @@ let store: StoreType = {
     _callSubscriber(state: StateType) {
         console.log("State changed")
     },
-    getState () {
+    getState() {
         return this._state
     },
-    subscribe (observer: (state: StateType) => void) {
+    subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer;
     },
 
-    dispatch(action: Action) {
+    dispatch(action: ActionType) {
         if (action.type === "ADD-POST") {
+
             let newPost: PostsPropsType = {
                 id: uuidv4(),
                 name: "Halina Kls",
@@ -91,20 +106,33 @@ let store: StoreType = {
                     "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
                 likeCount: 0,
             };
-
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = "";
             this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        }
+        else if (action.type === "UPDATE-NEW-POST-TEXT") {
+
             this._state.profilePage.newPostText = action.newPost;
+            this._callSubscriber(this._state);
+        }
+        else if (action.type === "ADD-MESSAGE"){
+
+            let newMessage: MessagesPropsType = {
+                id: uuidv4(),
+                message: this._state.messagesPage.newMessageText,
+            }
+            this._state.messagesPage.messages.push(newMessage)
+            this._state.messagesPage.newMessageText = "";
+            this._callSubscriber(this._state)
+        }
+        else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+
+            this._state.messagesPage.newMessageText = action.newMessage;
             this._callSubscriber(this._state);
         }
     },
 
 }
-
-
-
 
 export type MessagesPropsType = {
     id: string
@@ -116,8 +144,9 @@ export type UsersPropsType = {
     id: string
 }
 export type MessagesPageType = {
-    messages: MessagesPropsType[];
-    dialogs: UsersPropsType[];
+    messages: MessagesPropsType[]
+    newMessageText: string
+    dialogs: UsersPropsType[]
 };
 export type PostsPropsType = {
     id: string
@@ -153,16 +182,32 @@ export type StateType = {
 }
 
 export interface StoreType {
-    _state: StateType;
-    _callSubscriber: (state: StateType) => void;
-    subscribe: (observer: (state: StateType) => void) => void;
-    getState: () => StateType;
-    dispatch: (action: Action) => void;
+    _state: StateType
+    _callSubscriber: (state: StateType) => void
+    subscribe: (observer: (state: StateType) => void) => void
+    getState: () => StateType
+    dispatch: (action: ActionType) => void
 }
 
-export type Action =
+export type ActionType =
     | { type: "ADD-POST" }
-    | { type: "UPDATE-NEW-POST-TEXT"; newPost: string };
+    | { type: "UPDATE-NEW-POST-TEXT"; newPost: string }
+    | { type: "ADD-MESSAGE" }
+    | { type: "UPDATE-NEW-MESSAGE-TEXT"; newMessage: string };
 
+
+export const addPostActionCreator = (): ActionType => ({type: "ADD-POST"});
+
+export const updateNewPostTextActionCreator = (newPost: string): ActionType => ({
+    type: "UPDATE-NEW-POST-TEXT",
+    newPost
+});
+
+export const addMessageActionCreator = (): ActionType => ({type: "ADD-MESSAGE"});
+
+export const updateNewMessageTextActionCreator = (newMessage: string): ActionType => ({
+    type: "UPDATE-NEW-MESSAGE-TEXT",
+    newMessage
+});
 export default store;
 

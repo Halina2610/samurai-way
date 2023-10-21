@@ -1,37 +1,40 @@
-import React, { useRef } from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import { Post } from './post/Post';
 import classes from './MyPosts.module.css';
-import {Action, PostsPropsType} from '../../../redux/store';
-import {Button} from "../../ common/Button";
+import {
+    ActionType,
+    addPostActionCreator,
+    PostsPropsType,
+    updateNewPostTextActionCreator
+} from '../../../redux/store';
+import {Button} from "../../common/Button";
 
 type MyPostsPropsType = {
     postData: PostsPropsType[]
-    dispatch: (action: Action) => void
+    dispatch: (action: ActionType) => void
     newPostText:  string
 };
 
+
+
 export const MyPosts = (props: MyPostsPropsType) => {
-    const newPostElement = useRef<HTMLTextAreaElement>(null);
 
-    const addPostHandler = () => {
-        if (newPostElement.current && newPostElement.current.value) {
-            const post = newPostElement.current.value;
-            props.dispatch({type: "ADD-POST"});
-        }
+
+    const addPost = () => {
+        props.dispatch(addPostActionCreator());
     };
 
-    const onPostChange = () => {
-        if (newPostElement.current) {
-            const newPost = newPostElement.current.value;
-            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newPost});
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        if (e.currentTarget) {
+            const newPost = e.currentTarget.value;
+            props.dispatch(updateNewPostTextActionCreator(newPost));
         }
     };
-
     return (
         <div className={classes.postWrapper}>
             <div className={classes.blockAddPosts}>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
-                <Button onClick={addPostHandler} name={'add post'} />
+                <textarea onChange={onPostChange} value={props.newPostText} />
+                <Button onClick={addPost} name={'add post'} />
             </div>
             {props.postData.map((p) => (
                 <Post

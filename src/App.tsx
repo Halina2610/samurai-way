@@ -8,12 +8,12 @@ import { Dialogs } from './components/dialogs/Dialogs';
 import { News } from './components/news/News';
 import { Music } from './components/music/Music';
 import { Settings } from './components/settings/Settings';
-import {Action, StateType} from "./redux/store";
+import {ActionType, StateType} from "./redux/store";
 
 
 type AppProps = {
     state: StateType
-    dispatch: (action: Action) => void
+    dispatch: (action: ActionType) => void
 };
 
 function App(props: AppProps) {
@@ -29,7 +29,7 @@ function App(props: AppProps) {
                         )} />
 
                         <Route path="/dialogs" render={() => (
-                            <Dialogs messages={props.state.messagesPage} />
+                            <Dialogs dispatch={props.dispatch} messagesData={props.state.messagesPage} />
                         )} />
 
                         <Route path="/news" render={News} />
