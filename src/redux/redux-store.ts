@@ -6,7 +6,7 @@ import {StoreType} from "./store";
 
 let reducers= combineReducers({
     profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
+    messagesPage: dialogsReducer,
     sidebar: sidebarReducer
 })
 
