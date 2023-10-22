@@ -21,7 +21,7 @@ function App(props: AppProps) {
         <Router>
             <div className="app-wrapper">
                 <Header />
-                <Navbar sitebar={props.state.siteBar} />
+                <Navbar sitebar={props.state.sidebar} />
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/profile" render={() => (

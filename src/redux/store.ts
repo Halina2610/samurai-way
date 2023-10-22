@@ -1,9 +1,12 @@
 import {v4 as uuidv4} from 'uuid';
+import {profileReducer, ProfileReducerActionType} from "./reducers/profileReducer";
+import {dialogsReducer, DialogsReducerActionType} from "./reducers/dialogsReducer";
+import {SidebarActionType} from "./reducers/sidebarReducer";
 
 
 let store: StoreType = {
     _state: {
-        siteBar: {
+        sidebar: {
             menuItems: [
                 {path: '/profile', label: 'Profile'},
                 {path: '/dialogs', label: 'Message'},
@@ -95,42 +98,10 @@ let store: StoreType = {
     },
 
     dispatch(action: ActionType) {
-        if (action.type === "ADD-POST") {
-
-            let newPost: PostsPropsType = {
-                id: uuidv4(),
-                name: "Halina Kls",
-                post: this._state.profilePage.newPostText,
-                title: "New post",
-                img:
-                    "https://avatars.mds.yandex.net/i?id=b1d1f8fa520ba00305843b21c4cd3a5b_l-6557808-images-thumbs&n=13",
-                likeCount: 0,
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = "";
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === "UPDATE-NEW-POST-TEXT") {
-
-            this._state.profilePage.newPostText = action.newPost;
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === "ADD-MESSAGE"){
-
-            let newMessage: MessagesPropsType = {
-                id: uuidv4(),
-                message: this._state.messagesPage.newMessageText,
-            }
-            this._state.messagesPage.messages.push(newMessage)
-            this._state.messagesPage.newMessageText = "";
-            this._callSubscriber(this._state)
-        }
-        else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-
-            this._state.messagesPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state);
-        }
-    },
+        this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileReducerActionType);
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action as DialogsReducerActionType);
+        this._callSubscriber(this._state);
+    }
 
 }
 
@@ -162,7 +133,7 @@ type FriendsPropsType = {
     avatar: string
 }
 
-export type siteBarPropsType = {
+export type sidebarPropsType = {
     friends: FriendsPropsType[]
     menuItems: MenuItemType[]
 }
@@ -178,7 +149,7 @@ export type ProfilePageType = {
 export type StateType = {
     messagesPage: MessagesPageType
     profilePage: ProfilePageType
-    siteBar: siteBarPropsType
+    sidebar: sidebarPropsType
 }
 
 export interface StoreType {
@@ -190,24 +161,10 @@ export interface StoreType {
 }
 
 export type ActionType =
-    | { type: "ADD-POST" }
-    | { type: "UPDATE-NEW-POST-TEXT"; newPost: string }
-    | { type: "ADD-MESSAGE" }
-    | { type: "UPDATE-NEW-MESSAGE-TEXT"; newMessage: string };
+    | ProfileReducerActionType
+    | DialogsReducerActionType
+    | SidebarActionType
 
 
-export const addPostActionCreator = (): ActionType => ({type: "ADD-POST"});
-
-export const updateNewPostTextActionCreator = (newPost: string): ActionType => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newPost
-});
-
-export const addMessageActionCreator = (): ActionType => ({type: "ADD-MESSAGE"});
-
-export const updateNewMessageTextActionCreator = (newMessage: string): ActionType => ({
-    type: "UPDATE-NEW-MESSAGE-TEXT",
-    newMessage
-});
 export default store;
 
