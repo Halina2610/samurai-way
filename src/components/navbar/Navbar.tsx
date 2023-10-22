@@ -5,14 +5,14 @@ import {sidebarPropsType} from "../../redux/store";
 
 
 type NavbarPropsType = {
-    sitebar: sidebarPropsType;
+    sidebar: sidebarPropsType;
 };
 
 export const Navbar: React.FC<NavbarPropsType> = (props: NavbarPropsType) => {
     return (
         <div className={classes.siteBar}>
             <nav className={classes.nav}>
-                {props.sitebar.menuItems.map((item, index) => (
+                {props.sidebar.menuItems.map((item, index) => (
                     <div key={index} className={classes.item}>
                         <NavLink to={item.path} activeClassName={classes.activeLink}>
                             {item.label}
@@ -21,7 +21,7 @@ export const Navbar: React.FC<NavbarPropsType> = (props: NavbarPropsType) => {
                 ))}
             </nav>
             <div>
-                {props.sitebar.friends.map((friend) => (
+                {props.sidebar.friends.map((friend) => (
                     <div key={friend.id} className={classes.friends}>
                         <img src={friend.avatar} alt={friend.name} />
                         <span>{friend.name}</span>

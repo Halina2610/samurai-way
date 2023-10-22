@@ -6,5 +6,6 @@ type MessagePropsType = {
 }
 
 export const Message = (props: MessagePropsType) => {
+    debugger
     return <div className={classes.dialog}>{props.message}</div>;
 }

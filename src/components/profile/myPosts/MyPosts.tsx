@@ -29,6 +29,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             props.dispatch(updateNewPostTextActionCreator(newPost));
         }
     };
+
     return (
         <div className={classes.postWrapper}>
             <div className={classes.blockAddPosts}>

@@ -1,7 +1,7 @@
 import {v4 as uuidv4} from 'uuid';
 import {profileReducer, ProfileReducerActionType} from "./reducers/profileReducer";
 import {dialogsReducer, DialogsReducerActionType} from "./reducers/dialogsReducer";
-import {SidebarActionType} from "./reducers/sidebarReducer";
+import {SidebarActionType, sidebarReducer} from "./reducers/sidebarReducer";
 
 
 let store: StoreType = {
@@ -100,6 +100,7 @@ let store: StoreType = {
     dispatch(action: ActionType) {
         this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileReducerActionType);
         this._state.messagesPage = dialogsReducer(this._state.messagesPage, action as DialogsReducerActionType);
+
         this._callSubscriber(this._state);
     }
 

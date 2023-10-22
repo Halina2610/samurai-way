@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css';
 import { Message } from './message/Message';
 import { DialogItem } from './dialogItem/DialogItem';
@@ -10,7 +10,7 @@ import { Button } from '../common/Button';
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/reducers/dialogsReducer";
 
 type DialogsPropsType = {
-    messagesData: MessagesPageType;
+    messagesPage: MessagesPageType;
     dispatch: (action: ActionType) => void;
 };
 
@@ -28,23 +28,23 @@ export const Dialogs = (props: DialogsPropsType) => {
         }
     };
 
+    debugger
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
-                {props.messagesData.dialogs.map((d) => (
+                {props.messagesPage.dialogs.map((d) => (
                     <DialogItem name={d.name} key={d.id} />
                 ))}
             </div>
             <div className={classes.messages}>
-                {props.messagesData.messages.map((m) => (
+                {props.messagesPage.messages.map((m) => (
                     <Message key={m.id} message={m.message} />
                 ))}
             </div>
             <div>
                 <textarea
                     onChange={onMessageChange}
-                   // ref={newMessageElement}
-                    value={props.messagesData.newMessageText}
+                    value={props.messagesPage.newMessageText}
                     placeholder={'Enter you message... '}
                 />
                 <Button onClick={addMessage} name={'Send'} />
