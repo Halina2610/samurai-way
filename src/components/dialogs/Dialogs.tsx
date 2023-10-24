@@ -11,20 +11,21 @@ import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../
 
 type DialogsPropsType = {
     messagesPage: MessagesPageType;
-    dispatch: (action: ActionType) => void;
+    addMessage: () => void
+    updateNewMessageText: (newMessage: string) => void;
 };
 
 export const Dialogs = (props: DialogsPropsType) => {
 
 
     const addMessage = () => {
-        props.dispatch(addMessageActionCreator());
+        props.addMessage();
     };
 
     const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
             const newMessage = e.currentTarget.value;
-            props.dispatch(updateNewMessageTextActionCreator(newMessage));
+            props.updateNewMessageText(newMessage);
         }
     };
 

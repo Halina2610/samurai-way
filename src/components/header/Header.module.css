@@ -2,9 +2,11 @@
     grid-area: h;
     background: linear-gradient(to right, rgba(115, 0, 255, 0.8), rgba(255, 0, 153, 0.2));
     height: 65px;
+    width: 100vw;
     margin: 0;
     border-radius: 5px;
     display: flex;
+    position: fixed;
 }
 
 .logo {

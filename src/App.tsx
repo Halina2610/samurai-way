@@ -9,11 +9,11 @@ import { News } from './components/news/News';
 import { Music } from './components/music/Music';
 import { Settings } from './components/settings/Settings';
 import {ActionType, StateType, StoreType} from "./redux/store";
+import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 
 
 type AppProps = {
     state: StateType
-    dispatch: (action: ActionType) => void
     store: StoreType
 };
 
@@ -27,12 +27,12 @@ function App(props: AppProps) {
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/profile" render={() => (
-                            <Profile dispatch={props.dispatch} profilePage={props.state.profilePage} />
+                            <Profile store={props.store} />
                         )} />
 
                         <Route path="/dialogs" render={() =>  (
 
-                            <Dialogs dispatch={props.dispatch} messagesPage={props.store.getState().messagesPage} />
+                            <DialogsContainer store={props.store} />
                         )} />
 
                         <Route path="/news" render={News} />
