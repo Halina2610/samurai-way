@@ -1,12 +1,11 @@
 import React from 'react';
 import classes from './Profile.module.css';
-import {MyPosts} from './myPosts/MyPosts';
-import {ProfileInfo} from "./profileInfo/ProfileInfo";
-import {ActionType, ProfilePageType, StoreType} from "../../redux/store";
 import {MyPostsContainer} from "./myPosts/MyPostsContainer";
+import {StoreType} from "../../redux/store";
+import {ProfileInfo} from "./profileInfo/ProfileInfo";
 
 type ProfilePropsType = {
-    store: StoreType
+   /* store: StoreType*/
 };
 
 export const Profile = (props: ProfilePropsType) => {
@@ -21,7 +20,7 @@ export const Profile = (props: ProfilePropsType) => {
                          birth={'26 Oct. 1992'}
                          hrefSite={"http://www.exemple.com"}
                          nameWebSite={'exemple.com'}/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer />
         </div>
     );
 };
