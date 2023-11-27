@@ -1,5 +1,5 @@
-import { PostsPropsType, ProfilePageType } from "../store";
 import { v4 as uuidv4 } from "uuid";
+import {PostsPropsType, ProfilePageType} from "../../types";
 
 type AddPostActionType = {
      type: "ADD-POST";

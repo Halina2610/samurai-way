@@ -1,13 +1,42 @@
-import React from 'react';
-import { Dialogs } from "./Dialogs";
-import { addMessageActionCreator, updateNewMessageTextActionCreator } from "../../redux/reducers/dialogsReducer";
-import { StoreContext } from "../../redux/reducers/StoreContext";
+import {connect} from "react-redux";
+import {Dialogs} from "./Dialogs";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/reducers/dialogsReducer";
+import {AppStateType} from "../../redux/redux-store";
+import {MessagesPageType} from "../../types";
+import {Dispatch} from "redux";
 
-type DialogsPropsType = {
+type MapStatePropsType = {
+    messagesPage: MessagesPageType
+}
+
+type mapDispatchPropsType = {
+    addMessage: () => void
+    updateNewMessageText: (newMessage: string) => void
+}
+
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        messagesPage: state.messagesPage
+    }
+}
+const mapDispatchToProps = (dispatch: Dispatch ):mapDispatchPropsType => {
+    return {
+        addMessage: () => {
+            dispatch(addMessageActionCreator())
+        },
+        updateNewMessageText: (newMessage: string) => {
+            dispatch(updateNewMessageTextActionCreator(newMessage))
+        }
+    }
+}
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+/*type DialogsPropsType = {
   //  store: StoreType;
-};
+};*/
 
-export const DialogsContainer = (props: DialogsPropsType) => {
+/*export const DialogsContainer = (props: DialogsPropsType) => {
     return (
         <div>
             <StoreContext.Consumer>
@@ -32,4 +61,4 @@ export const DialogsContainer = (props: DialogsPropsType) => {
             </StoreContext.Consumer>
         </div>
     );
-};
+};*/

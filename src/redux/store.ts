@@ -1,7 +1,7 @@
 import {v4 as uuidv4} from 'uuid';
 import {profileReducer, ProfileReducerActionType} from "./reducers/profileReducer";
 import {dialogsReducer, DialogsReducerActionType} from "./reducers/dialogsReducer";
-import {SidebarActionType, sidebarReducer} from "./reducers/sidebarReducer";
+import {SidebarActionType} from "./reducers/sidebarReducer";
 
 
 let store: StoreType = {
@@ -106,21 +106,21 @@ let store: StoreType = {
 
 }
 
-export type MessagesPropsType = {
+type MessagesPropsType = {
     id: string
     message: string
 }
 
-export type UsersPropsType = {
+type UsersPropsType = {
     name: string
     id: string
 }
-export type MessagesPageType = {
+type MessagesPageType = {
     messages: MessagesPropsType[]
     newMessageText: string
     dialogs: UsersPropsType[]
 };
-export type PostsPropsType = {
+type PostsPropsType = {
     id: string
     name: string
     title: string
@@ -134,20 +134,20 @@ type FriendsPropsType = {
     avatar: string
 }
 
-export type sidebarPropsType = {
+ type sidebarPropsType = {
     friends: FriendsPropsType[]
     menuItems: MenuItemType[]
 }
-export type  MenuItemType = {
+ type  MenuItemType = {
     path: string;
     label: string;
 }
 
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: PostsPropsType[]
     newPostText: string
 }
-export type StateType = {
+type StateType = {
     messagesPage: MessagesPageType
     profilePage: ProfilePageType
     sidebar: sidebarPropsType

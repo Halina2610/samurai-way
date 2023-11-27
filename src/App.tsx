@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import { Header } from './components/header/Header';
@@ -8,7 +8,7 @@ import { News } from './components/news/News';
 import { Music } from './components/music/Music';
 import { Settings } from './components/settings/Settings';
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
-import {StoreContext} from "./redux/reducers/StoreContext";
+import store from "./redux/store";
 
 
 type AppProps = {
@@ -16,14 +16,13 @@ type AppProps = {
     store: StoreType*/
 };
 
-function App(props: AppProps) {
-    const store = useContext(StoreContext);
+function App() {
     return (
         <Router>
             <div className="app-wrapper">
                 <Header />
 
-                <Navbar sidebar={store.getState().sidebar} />
+             <Navbar sidebar={store.getState().sidebar} />
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/profile" render={() => (
