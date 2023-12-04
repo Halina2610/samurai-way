@@ -10,9 +10,10 @@ let initiationState: sidebarPropsType = {
         menuItems: [
             {path: '/profile', label: 'Profile'},
             {path: '/dialogs', label: 'Message'},
+            {path: '/users', label: 'Users'},
             {path: '/news', label: 'News'},
             {path: '/music', label: 'Music'},
-            {path: '/settings', label: 'Settings'}
+            {path: '/settings', label: 'Settings'},
         ],
         friends: [
             {
