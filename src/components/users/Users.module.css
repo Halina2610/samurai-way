@@ -1,0 +1,67 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%; /* Adjust the width as needed */
+    margin-bottom: 10px; /* Add margin between users */
+}
+
+.avatar {
+    margin-right: 10px;
+
+}
+
+.avatarImg {
+    width: 80px;
+    border-radius: 50%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 20px;
+    padding: 10px;
+    justify-content: space-between;
+}
+.infoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(142, 98, 197, 0.8);
+    border-radius: 10px;
+    width: 100%;
+    height: 100px;
+    margin: 10px;
+    padding: 20px;
+
+}
+.name {
+    text-align: start;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.status{
+    font-size: 0.8em;
+    font-weight: normal;
+    padding: 20px 0 ;
+}
+
+.location {
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+button {
+    margin-top: 10px; /* Add margin above the "More users" button */
+    text-align: center;
+    width: 120px;
+}
+
+.button button {
+    width: 150px;
+}
