@@ -1,36 +1,45 @@
-import {connect} from "react-redux";
-import {followAC, setUsersAC, unfollowAC, UsersPageType, UserType} from "../../redux/reducers/usersReducer";
-import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
-import {Users} from "./Users";
+import { connect } from "react-redux";
+import { AppStateType } from "../../redux/redux-store";
+import { Dispatch } from "redux";
+import {followAC, setUsersAC, unfollowAC } from "../../redux/actions/actionsUsers";
+import { UsersC } from "./UsersС";
+import {UsersDomainType, UserServerType, UsersServerType} from "../../api/usersApi";
+
+
 
 type MapStatePropsType = {
-    usersPage: UsersPageType
-}
+    usersPage: UsersDomainType;
+};
 
-type mapDispatchPropsType = {
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
-    setUsers: (users: UserType[]) => void
-}
+type MapDispatchPropsType = {
+    follow: (userId: string) => void;
+    unfollow: (userId: string) => void;
+    setUsers: (users: UserServerType[]) => void;
+};
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        usersPage: state.usersPage
-    }
-}
-const mapDispatchToProps = (dispatch: Dispatch ):mapDispatchPropsType => {
+        usersPage: state.usersPage,
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         follow: (userId: string) => {
-            dispatch(followAC(userId))
+            dispatch(followAC(userId));
         },
         unfollow: (userId: string) => {
-            dispatch(unfollowAC(userId))
+            dispatch(unfollowAC(userId));
         },
-        setUsers: (users: UserType[]) => {
-            dispatch(setUsersAC(users))
-        }
-    }
-}
-export const UsersContainer = connect (mapStateToProps, mapDispatchToProps)(Users)
+        setUsers: (users: UserServerType[]) => {
+            dispatch(setUsersAC({ users }));
+        },
+    };
+};
 
+
+
+export const UsersContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(
+    mapStateToProps,
+    mapDispatchToProps
+)(UsersC);

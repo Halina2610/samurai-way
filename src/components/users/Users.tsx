@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { UsersPageType, UserType } from "../../redux/reducers/usersReducer";
 import classes from "./Users.module.css";
 import { Button } from "../common/Button";
+import {UserServerType, UsersServerType} from "../../api/usersApi";
 
 type UsersPropsType = {
-    usersPage: UsersPageType;
+    usersPage: UsersServerType;
     follow: (userId: string) => void;
     unfollow: (userId: string) => void;
-    setUsers: (users: UserType[]) => void;
+    setUsers: (users: UserServerType[]) => void;
 };
 
 export const Users: React.FC<UsersPropsType> = ({
@@ -45,7 +45,7 @@ export const Users: React.FC<UsersPropsType> = ({
             {usersPage.users.slice(0, displayedUsersCount).map((user) => (
                 <div key={user.id} className={classes.userContainer}>
                     <div className={classes.avatar}>
-                        <img className={classes.avatarImg} src={user.avatar} alt="User Avatar" />
+                        <img className={classes.avatarImg} src={user.photos.small} alt="User avatar" />
                         <div className={classes.btn}>
                             {user.followed ? (
                                 <Button name={'Unfollow'} onClick={() => unfollowHandler(user.id)} />
@@ -56,11 +56,11 @@ export const Users: React.FC<UsersPropsType> = ({
                     </div>
                     <div className={classes.infoContainer}>
                         <div className={classes.name}>
-                            {user.fullName}
+                            {user.name}
                             <div className={classes.status}>{user.status}</div>
                         </div>
                         <div className={classes.location}>
-                            <span>{user.location.city}, {user.location.country}</span>
+                            <span>{`city: ''`}, {`country: ''`}</span>
                         </div>
                     </div>
                 </div>
