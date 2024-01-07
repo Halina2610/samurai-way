@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "./Button.module.css";
+import s from "./Button.module.css";
 
 type ButtonPropsType = {
     name: string
@@ -8,7 +8,7 @@ type ButtonPropsType = {
 
 export const Button = (props: ButtonPropsType) => {
     return (
-        <button className={classes.button} onClick={props.onClick}>
+        <button className={s.button} onClick={props.onClick}>
             {props.name}
         </button>
     );

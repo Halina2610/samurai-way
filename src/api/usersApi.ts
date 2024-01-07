@@ -28,7 +28,7 @@ export type UsersServerType = {
 export type UsersDomainType = {
     items: UserServerType[];
     error?: string | null;
-    totalCount?: number;
+    totalCount: number;
 };
 
 type ResponseType<D = {}> = {

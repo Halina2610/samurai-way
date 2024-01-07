@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Post } from './post/Post';
-import classes from './MyPosts.module.css';
+import s from './MyPosts.module.css';
 import { Button } from "../../common/Button";
 import {PostsPropsType} from "../../../types";
 
@@ -24,8 +24,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
     };
 
     return (
-        <div className={classes.postWrapper}>
-            <div className={classes.blockAddPosts}>
+        <div className={s.postWrapper}>
+            <div className={s.blockAddPosts}>
                 <textarea onChange={onPostChange} value={props.newPostText} />
                 <Button onClick={onAddPost} name={'add post'} />
             </div>

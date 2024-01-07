@@ -1,73 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import classes from "./Users.module.css";
-import { Button } from "../common/Button";
-import {UserServerType, UsersServerType} from "../../api/usersApi";
+import React from 'react';
+import s from "./Users.module.css";
+import {Button} from "../common/Button";
+import {UserServerType, UsersDomainType} from "../../api/usersApi";
+import userPhoto from '../../assets/images/user.png';
 
 type UsersPropsType = {
-    usersPage: UsersServerType;
+    usersPage: UsersDomainType;
+    pageSize: number
+    totalCount: number
+    currentPage: number
     follow: (userId: string) => void;
     unfollow: (userId: string) => void;
-    setUsers: (users: UserServerType[]) => void;
+    onPageChanged: (pageNumber: number) => void
 };
 
-export const Users: React.FC<UsersPropsType> = ({
-                                                    usersPage,
-                                                    unfollow,
-                                                    follow,
-                                                    setUsers,
-                                                }) => {
-    const [displayedUsersCount, setDisplayedUsersCount] = useState(3);
-    const [showAllUsers, setShowAllUsers] = useState(false);
 
-    useEffect(() => {
-        window.scrollTo(0, 0); // Прокрутка к верху страницы при изменении отображаемых пользователей
-    }, [displayedUsersCount]);
+export const Users = (props: UsersPropsType) => {
 
-    const followHandler = (userId: string) => {
-        follow(userId);
-    };
+    const {items: users} = props.usersPage;
+    const pagesCount = Math.ceil(props.totalCount / props.pageSize)
+    let pages: number[] = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
 
-    const unfollowHandler = (userId: string) => {
-        unfollow(userId);
-    };
-
-    const setUsersHandler = () => {
-        if (showAllUsers) {
-            setDisplayedUsersCount(3);
-        } else {
-            setDisplayedUsersCount((prevCount) => prevCount + 3);
-        }
-        setShowAllUsers(!showAllUsers);
-    };
+    const onPageChanged = (p: number) => {
+        props.onPageChanged(p)
+    }
 
     return (
-        <div className={classes.wrapper}>
-            {usersPage.users.slice(0, displayedUsersCount).map((user) => (
-                <div key={user.id} className={classes.userContainer}>
-                    <div className={classes.avatar}>
-                        <img className={classes.avatarImg} src={user.photos.small} alt="User avatar" />
-                        <div className={classes.btn}>
-                            {user.followed ? (
-                                <Button name={'Unfollow'} onClick={() => unfollowHandler(user.id)} />
+        <div className={s.wrapper}>
+            <div className={s.numberPage}>
+                {pages.map(p => {
+                    debugger
+                    return <span
+                        className={props.currentPage === p ? s.selectedPage : ''}
+                        onClick={() => {
+                            onPageChanged(p)
+                        }}
+
+                    >{p}</span>;
+                })}
+            </div>
+
+            {users.map((u: UserServerType) => (
+                <div key={u.id} className={s.userContainer}>
+                    <div className={s.avatar}>
+                        <img
+                            className={s.avatarImg}
+                            src={u.photos.small != null ? u.photos.small : userPhoto}
+                            alt="User Avatar"
+                        />
+                        <div className={s.btn}>
+                            {u.followed ? (
+                                <Button name={'Unfollow'} onClick={() => props.unfollow(u.id)}/>
                             ) : (
-                                <Button name={'Follow'} onClick={() => followHandler(user.id)} />
+                                <Button name={'Follow'} onClick={() => props.follow(u.id)}/>
                             )}
                         </div>
                     </div>
-                    <div className={classes.infoContainer}>
-                        <div className={classes.name}>
-                            {user.name}
-                            <div className={classes.status}>{user.status}</div>
-                        </div>
-                        <div className={classes.location}>
-                            <span>{`city: ''`}, {`country: ''`}</span>
+                    <div className={s.infoContainer}>
+                        <div className={s.name}>
+                            {u.name}
+                            <div className={s.status}>{u.status} {u.uniqueUrlName}</div>
                         </div>
                     </div>
                 </div>
             ))}
-            <div className={classes.button}>
-                <Button onClick={setUsersHandler} name={showAllUsers ? 'Hide users' : 'Show more'} />
-            </div>
         </div>
-    );
-};
+    )
+}

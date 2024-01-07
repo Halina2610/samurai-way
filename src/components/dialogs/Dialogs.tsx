@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import classes from './Dialogs.module.css';
+import s from './Dialogs.module.css';
 import { Message } from './message/Message';
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Button} from "../common/Button";
@@ -28,13 +28,13 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     debugger
     return (
-        <div className={classes.dialogs}>
-            <div className={classes.dialogsItems}>
+        <div className={s.dialogs}>
+            <div className={s.dialogsItems}>
                 {props.messagesPage.dialogs.map((d) => (
                     <DialogItem name={d.name} key={d.id} />
                 ))}
             </div>
-            <div className={classes.messages}>
+            <div className={s.messages}>
                 {props.messagesPage.messages.map((m) => (
                     <Message key={m.id} message={m.message} />
                 ))}

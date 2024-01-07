@@ -1,18 +1,25 @@
-import { UsersReducerActionType } from "../actions/actionsUsers";
+import { UsersReducerActionType} from "../actions/actionsUsers";
 import {UsersDomainType} from "../../api/usersApi";
 
 
 const initialState: UsersDomainType = {
     items: [],
-    totalCount: undefined,
+    totalCount: 0,
     error: undefined
 };
 
+const updatedInitialState = {
+    ...initialState,
+    pageSize: 10,
+    currentPage: 1
+};
+
+export type UpdatedUsersDomainType = UsersDomainType & { pageSize: number, currentPage: number };
 
 export const usersReducer = (
-    state: UsersDomainType = initialState,
+    state: UpdatedUsersDomainType = updatedInitialState,
     action: UsersReducerActionType
-): UsersDomainType => {
+): UpdatedUsersDomainType => {
     switch (action.type) {
         case "FOLLOW":
             return {
@@ -33,10 +40,25 @@ export const usersReducer = (
         case "SET-USERS":
             return {
                 ...state,
-                items: [...state.items, ...action.users.users],
+                items: action.users.users,
             };
+
+        case "SET_CURRENT_PAGE":
+            return {
+                ...state,
+                currentPage: action.pageNumber
+
+            };
+
+        case "SET-TOTAL-COUNT":
+            return {
+                ...state,
+                totalCount: action.totalCount
+            }
 
         default:
             return state;
     }
 };
+
+

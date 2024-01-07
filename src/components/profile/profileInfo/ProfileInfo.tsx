@@ -1,4 +1,4 @@
-import classes from "./ProfileInfo.module.css";
+import s from "./ProfileInfo.module.css";
 import React from "react";
 
 type ProfileInfoPropsType = {
@@ -18,12 +18,12 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         <div className={'app-wrapper-content'}>
             <div>
                 <img
-                    className={classes.img}
+                    className={s.img}
                     src={props.srsBackgrond}
                     alt={props.alt1}
                 />
             </div>
-            <div className={classes.avatar}>
+            <div className={s.avatar}>
                 <div>
                     <img
                         src={props.srsAvatar}
