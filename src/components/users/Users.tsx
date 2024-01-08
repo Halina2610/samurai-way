@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {Button} from "../common/Button";
+import {Button} from "../common/button/Button";
 import {UserServerType, UsersDomainType} from "../../api/usersApi";
 import userPhoto from '../../assets/images/user.png';
 
@@ -32,7 +32,6 @@ export const Users = (props: UsersPropsType) => {
         <div className={s.wrapper}>
             <div className={s.numberPage}>
                 {pages.map(p => {
-                    debugger
                     return <span
                         className={props.currentPage === p ? s.selectedPage : ''}
                         onClick={() => {

@@ -11,10 +11,11 @@ const initialState: UsersDomainType = {
 const updatedInitialState = {
     ...initialState,
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 };
 
-export type UpdatedUsersDomainType = UsersDomainType & { pageSize: number, currentPage: number };
+export type UpdatedUsersDomainType = UsersDomainType & { pageSize: number, currentPage: number, isFetching: boolean };
 
 export const usersReducer = (
     state: UpdatedUsersDomainType = updatedInitialState,
@@ -54,6 +55,12 @@ export const usersReducer = (
             return {
                 ...state,
                 totalCount: action.totalCount
+            };
+
+        case "TOGGLE-IS-FETCHING":
+            return {
+                ...state,
+                isFetching: action.isFetching
             }
 
         default:

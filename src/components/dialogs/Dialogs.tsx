@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import { Message } from './message/Message';
 import {DialogItem} from "./dialogItem/DialogItem";
-import {Button} from "../common/Button";
+import {Button} from "../common/button/Button";
 import {MessagesPageType} from "../../types";
 
 

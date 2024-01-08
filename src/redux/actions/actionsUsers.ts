@@ -32,13 +32,20 @@ type SetTotalCountActionType = {
     totalCount: number
 }
 
+type ToggleIsFetchingActionType = {
+    type: "TOGGLE-IS-FETCHING"
+    isFetching: boolean
+}
+
+
 export type UsersReducerActionType =
     | UnfollowActionType
     | FollowActionType
     | SetUsersActionType
     | FetchUsersActionType
     | SetCurrentPageActionType
-    | SetTotalCountActionType;
+    | SetTotalCountActionType
+    | ToggleIsFetchingActionType;
 
 export const followAC = (userId: string): UsersReducerActionType => ({
     type: "FOLLOW",
@@ -65,3 +72,7 @@ export const setTotalCountAC = (totalCount: number): SetTotalCountActionType => 
     totalCount: totalCount
 })
 
+export const ToggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingActionType => ({
+    type: "TOGGLE-IS-FETCHING",
+    isFetching: isFetching
+})
