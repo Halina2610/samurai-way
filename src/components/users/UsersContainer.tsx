@@ -10,7 +10,6 @@ import {
 } from "../../redux/actions/actionsUsers";
 import {usersApi, UsersDomainType, UserServerType} from "../../api/usersApi";
 import React, {Component} from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 
@@ -52,10 +51,10 @@ type UsersState = {
 };
 
 export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
-    componentDidMount = () => {
+    componentDidMount = async () => {
         if (this.props.usersPage.items.length === 0) {
             this.props.toggleIsFetching(true)
-                usersApi.getUsers(this.props.currentPage, this.props.pageSize)
+               await usersApi.getUsers(this.props.currentPage, this.props.pageSize)
                 .then((response) => {
                     this.props.toggleIsFetching(false)
                     this.props.setUsers(response.items)
@@ -65,14 +64,13 @@ export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
         }
     }
 
-    onPageChanged = (pageNumber: number) => {
+    onPageChanged = async (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true)
-        usersApi.getUsers(pageNumber, this.props.pageSize)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        await usersApi.getUsers(pageNumber, this.props.pageSize)
             .then((response) => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(response.items);
             })
             .catch(error => console.log(error.message));
     }
