@@ -9,37 +9,37 @@ const instance = axios.create({
 });
 
 export type UserServerType = {
-    id: string;
-    name: string;
-    status: string | undefined;
-    uniqueUrlName: string | undefined;
-    followed: boolean;
+    id: number,
+    name: string,
+    status: string,
     photos: {
-        small: string | undefined;
-        large: string | undefined;
-    };
-};
-
-
-export type UsersServerType = {
-    users: UserServerType[];
-};
+        small: string,
+        large: string
+    }
+    followed: boolean
+    followingInProgress: boolean
+}
 
 export type UsersDomainType = {
     items: UserServerType[];
-    error?: string | null;
-    totalCount: number;
+    pageSize: number,
+    totalCount: number,
+    currentPage: number,
+    isFetching: boolean,
 };
 
-type ResponseType<D = {}> = {
-    resultCode: number;
-    messages: string[];
-    data: D;
-    fieldsErrors?: string[];
-};
+
 
 export const usersApi = {
-    getUsers() {
-        return instance.get<UsersDomainType>("/users").then((response) => response.data);
+    getUsers(page: number = 1, count: number = 10, term: string = '', friend: boolean | undefined = undefined): Promise<UsersDomainType> {
+        const params = {
+            page,
+            count,
+            term,
+            friend
+        };
+
+        return instance.get('/users', { params })
+            .then(response => response.data);
     },
 };

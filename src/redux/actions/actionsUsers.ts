@@ -1,21 +1,19 @@
-import {usersApi, UserServerType, UsersServerType} from "../../api/usersApi";
-import {AnyAction, Dispatch} from "redux";
-import store from "../redux-store";
+import {UserServerType} from "../../api/usersApi";
 
 
 type FollowActionType = {
     type: "FOLLOW";
-    userId: string;
+    userId: number;
 };
 
 type UnfollowActionType = {
     type: "UNFOLLOW";
-    userId: string;
+    userId: number;
 };
 
 type SetUsersActionType = {
     type: "SET-USERS";
-    users: UsersServerType;
+    users: UserServerType[];
 };
 
 type FetchUsersActionType = {
@@ -47,32 +45,32 @@ export type UsersReducerActionType =
     | SetTotalCountActionType
     | ToggleIsFetchingActionType;
 
-export const followAC = (userId: string): UsersReducerActionType => ({
+export const follow = (userId: number): UsersReducerActionType => ({
     type: "FOLLOW",
     userId,
 });
 
-export const unfollowAC = (userId: string): UsersReducerActionType => ({
+export const unfollow = (userId: number): UsersReducerActionType => ({
     type: "UNFOLLOW",
     userId,
 });
 
-export const setUsersAC = (users: UsersServerType): UsersReducerActionType => ({
+export const setUsers = (users: UserServerType[]): UsersReducerActionType => ({
     type: "SET-USERS",
     users,
 });
 
-export const setCurrentPageAC = (pageNumber: number): SetCurrentPageActionType => ({
+export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => ({
     type: "SET_CURRENT_PAGE",
     pageNumber: pageNumber
 });
 
-export const setTotalCountAC = (totalCount: number): SetTotalCountActionType => ({
+export const setTotalCount = (totalCount: number): SetTotalCountActionType => ({
     type: "SET-TOTAL-COUNT",
     totalCount: totalCount
 })
 
-export const ToggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingActionType => ({
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({
     type: "TOGGLE-IS-FETCHING",
     isFetching: isFetching
 })

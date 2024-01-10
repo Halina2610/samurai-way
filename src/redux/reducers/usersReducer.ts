@@ -5,22 +5,17 @@ import {UsersDomainType} from "../../api/usersApi";
 const initialState: UsersDomainType = {
     items: [],
     totalCount: 0,
-    error: undefined
-};
-
-const updatedInitialState = {
-    ...initialState,
-    pageSize: 10,
+    isFetching: false,
     currentPage: 1,
-    isFetching: false
+    pageSize: 100
 };
 
-export type UpdatedUsersDomainType = UsersDomainType & { pageSize: number, currentPage: number, isFetching: boolean };
+
 
 export const usersReducer = (
-    state: UpdatedUsersDomainType = updatedInitialState,
+    state: UsersDomainType = initialState,
     action: UsersReducerActionType
-): UpdatedUsersDomainType => {
+): UsersDomainType => {
     switch (action.type) {
         case "FOLLOW":
             return {
@@ -41,7 +36,7 @@ export const usersReducer = (
         case "SET-USERS":
             return {
                 ...state,
-                items: action.users.users,
+                items: action.users,
             };
 
         case "SET_CURRENT_PAGE":

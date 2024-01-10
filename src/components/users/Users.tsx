@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {Button} from "../common/button/Button";
-import {UserServerType, UsersDomainType} from "../../api/usersApi";
+import {UsersDomainType, UserServerType} from "../../api/usersApi";
 import userPhoto from '../../assets/images/user.png';
 
 type UsersPropsType = {
@@ -9,8 +9,8 @@ type UsersPropsType = {
     pageSize: number
     totalCount: number
     currentPage: number
-    follow: (userId: string) => void;
-    unfollow: (userId: string) => void;
+    follow: (userId: number) => void;
+    unfollow: (userId: number) => void;
     onPageChanged: (pageNumber: number) => void
 };
 
@@ -61,7 +61,7 @@ export const Users = (props: UsersPropsType) => {
                     <div className={s.infoContainer}>
                         <div className={s.name}>
                             {u.name}
-                            <div className={s.status}>{u.status} {u.uniqueUrlName}</div>
+                            <div className={s.status}>{u.status} </div>
                         </div>
                     </div>
                 </div>
