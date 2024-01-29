@@ -12,6 +12,7 @@ type UsersPropsType = {
     follow: (userId: number) => void;
     unfollow: (userId: number) => void;
     onPageChanged: (pageNumber: number) => void
+    isFetching: boolean
 };
 
 
@@ -30,18 +31,19 @@ export const Users = (props: UsersPropsType) => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.numberPage}>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage === p ? s.selectedPage : ''}
-                        onClick={() => {
-                            onPageChanged(p)
-                        }}
+            {props.isFetching ? null :
+                <div className={s.numberPage}>
+                    {pages.map(p => {
+                        return <span
+                            className={props.currentPage === p ? s.selectedPage : ''}
+                            onClick={() => {
+                                onPageChanged(p)
+                            }}
 
-                    >{p}</span>;
-                })}
-            </div>
-
+                        >{p}</span>;
+                    })}
+                </div>
+            }
             {users.map((u: UserServerType) => (
                 <div key={u.id} className={s.userContainer}>
                     <div className={s.avatar}>

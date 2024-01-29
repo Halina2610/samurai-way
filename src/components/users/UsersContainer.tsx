@@ -66,10 +66,11 @@ export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
 
     onPageChanged = async (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true)
+        this.props.toggleIsFetching(true);
+        this.props.setUsers([]); // Очистка списка пользователей перед загрузкой новой страницы
         await usersApi.getUsers(pageNumber, this.props.pageSize)
             .then((response) => {
-                this.props.toggleIsFetching(false)
+                this.props.toggleIsFetching(false);
                 this.props.setUsers(response.items);
             })
             .catch(error => console.log(error.message));
@@ -77,7 +78,7 @@ export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
+            {this.props.isFetching ? <Preloader/> : undefined}
 
             <Users
                 usersPage={this.props.usersPage}
@@ -87,6 +88,7 @@ export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 onPageChanged={this.onPageChanged}
+                isFetching={this.props.isFetching}
             />
         </>
     }
