@@ -10,11 +10,6 @@ type ProfileInfoPropsType = {
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={'app-wrapper-content'}>
-            <div>
-                {props.profilePage.photos.large && (
-                    <img className={s.img} src={props.profilePage.photos.large} alt={'lardge photo'} />
-                )}
-            </div>
             <div className={s.avatar}>
                 <div>
                     {props.profilePage.photos.small && (

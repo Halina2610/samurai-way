@@ -5,6 +5,7 @@ import {UserApiProfileResponse, usersApi} from "../../api/usersApi";
 import React, {Component} from "react";
 import {Profile} from "./Profile";
 import {setUserProfileAC} from "../../redux/reducers/profileReducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type MapStatePropsType = {
     profilePage: UserApiProfileResponse;
@@ -17,14 +18,18 @@ type MapDispatchPropsType = {
 type UsersPropsType = {
     setUserProfile: (profile: UserApiProfileResponse) => void;
     profilePage: UserApiProfileResponse;
-};
+} & RouteComponentProps<{ userId: string }>;
 
 export class ProfileComponent extends Component<UsersPropsType> {
-    componentDidMount = async () => {
-        const userId: number = 2;
 
+    componentDidMount = async () => {
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId = '30103'
+        }
         try {
-            const response = await usersApi.getProfileUsers(userId);
+            const response = await usersApi.getProfileUsers(+userId);
+
             const userProfile = response.data;
             this.props.setUserProfile(userProfile);
         } catch (error: any) {
@@ -47,6 +52,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 
+
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         setUserProfile: (profile: UserApiProfileResponse) => {
@@ -54,6 +60,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         },
     };
 };
+
+export const ProfileComponentWithRouter = withRouter(ProfileComponent);
 
 export const ProfileContainer = connect<
     MapStatePropsType,
@@ -63,5 +71,5 @@ export const ProfileContainer = connect<
 >(
     mapStateToProps,
     mapDispatchToProps
-)(ProfileComponent);
+)(ProfileComponentWithRouter);
 

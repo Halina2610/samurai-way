@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import {Header} from './components/header/Header';
-import {Profile} from './components/profile/Profile';
 import {News} from './components/news/News';
 import {Music} from './components/music/Music';
 import {Settings} from './components/settings/Settings';
@@ -18,9 +17,10 @@ function App() {
             <div className="app-wrapper">
                 <Header/>
                 <NavbarContainer/>
+
                 <div className="app-wrapper-content">
                     <Switch>
-                        <Route path="/profile" render={() => (
+                        <Route path="/profile/:userId?" render={() => (
                             <ProfileContainer/>
                         )}/>
                         <Route path="/dialogs" render={() => (

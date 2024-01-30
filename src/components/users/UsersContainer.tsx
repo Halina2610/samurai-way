@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -106,14 +105,14 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 };
 
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => ({
+const mapDispatchToProps = {
     follow,
     unfollow,
     setUsers,
     setCurrentPage,
     setTotalCount,
     toggleIsFetching
-})
+};
 
 
 export const UsersContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(
