@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import {PostsPropsType, ProfilePageType} from "../../types";
+import {UserApiProfileResponse} from "../../api/usersApi";
 
 type AddPostActionType = {
      type: "ADD-POST";
@@ -10,8 +11,22 @@ type UpdateNewPostTextActionType = {
      newPost: string;
 };
 
+type SetUserProfileActionType = {
+     type: "SET-USER-PROFILE";
+     profile: UserApiProfileResponse
+}
+
 
 let initiationState: ProfilePageType =  {
+     profile: {
+          userId: 0,
+          lookingForAJob: false,
+          lookingForAJobDescription: '',
+          fullName: '',
+          contacts: {github: '', vk: '', facebook: '', instagram: '', twitter: '', website: '', youtube: '', mainLink: ''},
+          photos: {small: null, large: null}
+     },
+
      posts: [
           {
                id: uuidv4(), name: 'Murkiss',
@@ -51,7 +66,8 @@ let initiationState: ProfilePageType =  {
 
 export type ProfileReducerActionType =
     | AddPostActionType
-    | UpdateNewPostTextActionType;
+    | UpdateNewPostTextActionType
+    | SetUserProfileActionType;
 
 export const profileReducer = (
     state: ProfilePageType = initiationState,
@@ -78,6 +94,11 @@ export const profileReducer = (
                     ...state,
                     newPostText: action.newPost,
                };
+          case "SET-USER-PROFILE": {
+               return {
+                    ...state, profile: action.profile
+               }
+          }
           default:
                return state;
      }
@@ -89,3 +110,5 @@ export const updateNewPostTextActionCreator = (newPost: string): ProfileReducerA
      type: "UPDATE-NEW-POST-TEXT",
      newPost
 });
+
+export const setUserProfileAC = (profile: UserApiProfileResponse): ProfileReducerActionType => ({type: "SET-USER-PROFILE", profile})

@@ -9,6 +9,7 @@ import {Settings} from './components/settings/Settings';
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {NavbarContainer} from "./components/navbar/NavbarContainer";
 import {UsersContainer} from "./components/users/UsersContainer";
+import {ProfileContainer} from "./components/profile/ProfileComponent";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
                 <div className="app-wrapper-content">
                     <Switch>
                         <Route path="/profile" render={() => (
-                            <Profile/>
+                            <ProfileContainer/>
                         )}/>
                         <Route path="/dialogs" render={() => (
                             <DialogsContainer/>

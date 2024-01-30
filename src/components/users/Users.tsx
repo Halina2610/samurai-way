@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import {Button} from "../common/button/Button";
 import {UsersDomainType, UserServerType} from "../../api/usersApi";
 import userPhoto from '../../assets/images/user.png';
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     usersPage: UsersDomainType;
@@ -47,11 +48,12 @@ export const Users = (props: UsersPropsType) => {
             {users.map((u: UserServerType) => (
                 <div key={u.id} className={s.userContainer}>
                     <div className={s.avatar}>
-                        <img
-                            className={s.avatarImg}
+                        <NavLink to={`/profile/${u.id }`} >
+                            <img className={s.avatarImg}
                             src={u.photos.small != null ? u.photos.small : userPhoto}
                             alt="User Avatar"
-                        />
+                            />
+                        </NavLink>
                         <div className={s.btn}>
                             {u.followed ? (
                                 <Button name={'Unfollow'} onClick={() => props.unfollow(u.id)}/>

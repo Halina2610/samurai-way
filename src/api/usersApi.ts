@@ -20,6 +20,28 @@ export type UserServerType = {
     followingInProgress: boolean
 }
 
+export type UserApiProfileResponse = {
+    userId: number;
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    fullName: string;
+    contacts: {
+        github: string;
+        vk: string;
+        facebook: string;
+        instagram: string;
+        twitter: string;
+        website: string;
+        youtube: string;
+        mainLink: string;
+    };
+    photos: {
+        small: string | null;
+        large: string | null;
+    };
+};
+
+
 export type UsersDomainType = {
     items: UserServerType[];
     pageSize: number,
@@ -42,4 +64,7 @@ export const usersApi = {
         return instance.get('/users', { params })
             .then(response => response.data);
     },
+    getProfileUsers (userId: number) {
+        return instance.get<UserApiProfileResponse>(`/profile/${userId}`)
+    }
 };

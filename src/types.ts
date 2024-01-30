@@ -1,3 +1,4 @@
+import {UserApiProfileResponse} from "./api/usersApi";
 
 export type MessagesPageType = {
     messages: MessagesPropsType[]
@@ -41,5 +42,6 @@ export type  MenuItemType = {
 
 export type ProfilePageType = {
     posts: PostsPropsType[]
-    newPostText: string
+    newPostText: string,
+    profile: UserApiProfileResponse
 }

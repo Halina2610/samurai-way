@@ -2,6 +2,7 @@ import {v4 as uuidv4} from 'uuid';
 import {profileReducer, ProfileReducerActionType} from "./reducers/profileReducer";
 import {dialogsReducer, DialogsReducerActionType} from "./reducers/dialogsReducer";
 import {SidebarActionType} from "./reducers/sidebarReducer";
+import {UserApiProfileResponse} from "../api/usersApi";
 
 
 let store: StoreType = {
@@ -49,6 +50,14 @@ let store: StoreType = {
         },
 
         profilePage: {
+            profile: {
+                userId: 0,
+                lookingForAJob: false,
+                lookingForAJobDescription: '',
+                fullName: '',
+                contacts: {github: '', vk: '', facebook: '', instagram: '', twitter: '', website: '', youtube: '', mainLink: ''},
+                photos: {small: null, large: null}
+            },
             posts: [
                 {
                     id: uuidv4(), name: 'Murkiss',
@@ -146,6 +155,7 @@ type FriendsPropsType = {
  type ProfilePageType = {
     posts: PostsPropsType[]
     newPostText: string
+     profile: UserApiProfileResponse
 }
 type StateType = {
     messagesPage: MessagesPageType
