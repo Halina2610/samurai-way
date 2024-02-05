@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {Button} from "../../components/common/button/Button";
-import {UsersDomainType, UserServerType} from "../../api/usersApi";
+import {usersApi, UsersDomainType, UserServerType} from "../../api/usersApi";
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
 
@@ -48,17 +48,27 @@ export const Users = (props: UsersPropsType) => {
             {users.map((u: UserServerType) => (
                 <div key={u.id} className={s.userContainer}>
                     <div className={s.avatar}>
-                        <NavLink to={`/profile/${u.id }`} >
+                        <NavLink to={`/profile/${u.id}`}>
                             <img className={s.avatarImg}
-                            src={u.photos.small != null ? u.photos.small : userPhoto}
-                            alt="User Avatar"
+                                 src={u.photos.small != null ? u.photos.small : userPhoto}
+                                 alt="User Avatar"
                             />
                         </NavLink>
                         <div className={s.btn}>
                             {u.followed ? (
-                                <Button name={'Unfollow'} onClick={() => props.unfollow(u.id)}/>
+                                <Button name={'Unfollow'} onClick={() => {
+                                    usersApi.unFollowUser(u.id)
+                                    props.unfollow(u.id)
+                                }}/>
                             ) : (
-                                <Button name={'Follow'} onClick={() => props.follow(u.id)}/>
+                                <Button name={'Follow'} onClick={() => {
+                                    usersApi.followUser(u.id)
+                                        .then(res => {
+                                            if (res.data.resultCode === 0)
+                                                props.follow(u.id)
+                                        })
+
+                                }}/>
                             )}
                         </div>
                     </div>
