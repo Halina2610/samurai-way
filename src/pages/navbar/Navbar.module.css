@@ -18,6 +18,10 @@
     color: #abfff1;
 }
 
+.item a:hover {
+    color: #f696c6;
+}
+
 .activeLinc {
     color: aliceblue;
     text-decoration: none;
