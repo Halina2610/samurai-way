@@ -1,6 +1,6 @@
 import {instance} from "./utils/instance";
 
-export const usersApi = {
+export const usersAPI = {
     getUsers(page: number = 1, count: number = 10, term: string = '', friend: boolean | undefined = undefined): Promise<UsersDomainType> {
         const params = {
             page,

@@ -1,4 +1,4 @@
-import {UserApiProfileResponse} from "./api/usersApi";
+import {UserApiProfileResponse} from "./api/usersAPI";
 
 export type MessagesPageType = {
     messages: MessagesPropsType[]

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import {PostsPropsType, ProfilePageType} from "../../types";
-import {UserApiProfileResponse} from "../../api/usersApi";
+import {UserApiProfileResponse} from "../../api/usersAPI";
 
 type AddPostActionType = {
      type: "ADD-POST";

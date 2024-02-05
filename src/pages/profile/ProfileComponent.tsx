@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store/store";
 import {Dispatch} from "redux";
-import {UserApiProfileResponse, usersApi} from "../../api/usersApi";
+import {UserApiProfileResponse, usersAPI} from "../../api/usersAPI";
 import React, {Component} from "react";
 import {Profile} from "./Profile";
 import {setUserProfileAC} from "../../redux/reducers/profileReducer";
@@ -28,7 +28,7 @@ export class ProfileComponent extends Component<UsersPropsType> {
             userId = '30103'
         }
         try {
-            const response = await usersApi.getProfileUsers(+userId);
+            const response = await usersAPI.getProfileUsers(+userId);
 
             const userProfile = response.data;
             this.props.setUserProfile(userProfile);

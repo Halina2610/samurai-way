@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {Button} from "../../components/common/button/Button";
-import {usersApi, UsersDomainType, UserServerType} from "../../api/usersApi";
+import {usersAPI, UsersDomainType, UserServerType} from "../../api/usersAPI";
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
 
@@ -57,12 +57,12 @@ export const Users = (props: UsersPropsType) => {
                         <div className={s.btn}>
                             {u.followed ? (
                                 <Button name={'Unfollow'} onClick={() => {
-                                    usersApi.unFollowUser(u.id)
+                                    usersAPI.unFollowUser(u.id)
                                     props.unfollow(u.id)
                                 }}/>
                             ) : (
                                 <Button name={'Follow'} onClick={() => {
-                                    usersApi.followUser(u.id)
+                                    usersAPI.followUser(u.id)
                                         .then(res => {
                                             if (res.data.resultCode === 0)
                                                 props.follow(u.id)

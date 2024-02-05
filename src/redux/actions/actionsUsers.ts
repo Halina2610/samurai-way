@@ -1,4 +1,4 @@
-import {UserServerType} from "../../api/usersApi";
+import {UserServerType} from "../../api/usersAPI";
 
 export const follow = (userId: number): UsersReducerActionType => ({
     type: "FOLLOW",

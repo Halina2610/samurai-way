@@ -7,7 +7,7 @@ import {
     setUsers, toggleIsFetching,
     unfollow
 } from "../../redux/actions/actionsUsers";
-import {usersApi, UsersDomainType, UserServerType} from "../../api/usersApi";
+import {usersAPI, UsersDomainType, UserServerType} from "../../api/usersAPI";
 import React, {Component} from "react";
 import {Users} from "./Users";
 import {Preloader} from "../../components/common/preloader/Preloader";
@@ -53,7 +53,7 @@ export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
     componentDidMount = async () => {
         if (this.props.usersPage.items.length === 0) {
             this.props.toggleIsFetching(true)
-               await usersApi.getUsers(this.props.currentPage, this.props.pageSize)
+               await usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
                 .then((response) => {
                     this.props.toggleIsFetching(false)
                     this.props.setUsers(response.items)
@@ -67,7 +67,7 @@ export class UsersApiComponent extends Component<UsersPropsType, UsersState> {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true);
         this.props.setUsers([]); // Очистка списка пользователей перед загрузкой новой страницы
-        await usersApi.getUsers(pageNumber, this.props.pageSize)
+        await usersAPI.getUsers(pageNumber, this.props.pageSize)
             .then((response) => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.items);

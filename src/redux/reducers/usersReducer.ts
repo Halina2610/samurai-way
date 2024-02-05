@@ -1,5 +1,5 @@
 import { UsersReducerActionType} from "../actions/actionsUsers";
-import {UsersDomainType} from "../../api/usersApi";
+import {UsersDomainType} from "../../api/usersAPI";
 
 
 const initialState: UsersDomainType = {

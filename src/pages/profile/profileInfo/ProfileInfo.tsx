@@ -1,6 +1,6 @@
 import s from "./ProfileInfo.module.css";
 import React from "react";
-import {UserApiProfileResponse} from "../../../api/usersApi";
+import {UserApiProfileResponse} from "../../../api/usersAPI";
 
 type ProfileInfoPropsType = {
     profilePage: UserApiProfileResponse;
