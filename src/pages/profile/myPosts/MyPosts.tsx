@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { Post } from './post/Post';
+import { Post } from '../post/Post';
 import s from './MyPosts.module.css';
-import { Button } from "../../common/button/Button";
+import { Button } from "../../../components/common/button/Button";
 import {PostsPropsType} from "../../../types";
 
 type MyPostsPropsType = {

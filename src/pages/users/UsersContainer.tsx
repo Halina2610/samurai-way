@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store/store";
 import {
     follow,
     setCurrentPage,
@@ -10,7 +10,7 @@ import {
 import {usersApi, UsersDomainType, UserServerType} from "../../api/usersApi";
 import React, {Component} from "react";
 import {Users} from "./Users";
-import {Preloader} from "../common/preloader/Preloader";
+import {Preloader} from "../../components/common/preloader/Preloader";
 
 type MapStatePropsType = {
     usersPage: UsersDomainType;

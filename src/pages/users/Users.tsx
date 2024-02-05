@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {Button} from "../common/button/Button";
+import {Button} from "../../components/common/button/Button";
 import {UsersDomainType, UserServerType} from "../../api/usersApi";
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";

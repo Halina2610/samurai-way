@@ -1,14 +1,15 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
-import {Header} from './components/header/Header';
-import {News} from './components/news/News';
-import {Music} from './components/music/Music';
-import {Settings} from './components/settings/Settings';
-import {DialogsContainer} from "./components/dialogs/DialogsContainer";
-import {NavbarContainer} from "./components/navbar/NavbarContainer";
-import {UsersContainer} from "./components/users/UsersContainer";
-import {ProfileContainer} from "./components/profile/ProfileComponent";
+import {Header} from './pages/header/Header';
+import {News} from './pages/news/News';
+import {Music} from './pages/music/Music';
+import {Settings} from './pages/settings/Settings';
+import {DialogsContainer} from "./pages/dialogs/DialogsContainer";
+import {NavbarContainer} from "./pages/navbar/NavbarContainer";
+import {UsersContainer} from "./pages/users/UsersContainer";
+import {ProfileContainer} from "./pages/profile/ProfileComponent";
+import {LoginContainer} from "./pages/login/LoginContainer";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                         <Route path="/music" component={Music} />
                         <Route path="/users" component={UsersContainer} />
                         <Route path="/settings" component={Settings} />
+                        <Route path="/login" component={LoginContainer} />
                     </Switch>
                 </div>
             </div>

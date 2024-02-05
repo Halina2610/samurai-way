@@ -1,10 +1,9 @@
 import React from 'react';
 import s from './Profile.module.css';
-import {MyPostsContainer} from "./myPosts/MyPostsContainer";
 import {ProfileInfo} from "./profileInfo/ProfileInfo";
-import fon from "../../assets/images/fon-profile.jpg"
 import {UserApiProfileResponse} from "../../api/usersApi"
-import {Preloader} from "../common/preloader/Preloader";
+import {Preloader} from "../../components/common/preloader/Preloader";
+import {MyPostsContainer} from "./myPosts/MyPostsContainer";
 
 type PropsType = {
     profilePage: UserApiProfileResponse;

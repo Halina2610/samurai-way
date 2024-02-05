@@ -1,6 +1,33 @@
 import {UserServerType} from "../../api/usersApi";
 
+export const follow = (userId: number): UsersReducerActionType => ({
+    type: "FOLLOW",
+    userId,
+});
+export const unfollow = (userId: number): UsersReducerActionType => ({
+    type: "UNFOLLOW",
+    userId,
+});
+export const setUsers = (users: UserServerType[]): UsersReducerActionType => ({
+    type: "SET-USERS",
+    users,
+});
+export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => ({
+    type: "SET_CURRENT_PAGE",
+    pageNumber: pageNumber
+});
+export const setTotalCount = (totalCount: number): SetTotalCountActionType => ({
+    type: "SET-TOTAL-COUNT",
+    totalCount: totalCount
+})
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({
+    type: "TOGGLE-IS-FETCHING",
+    isFetching: isFetching
+})
 
+
+
+//types
 type FollowActionType = {
     type: "FOLLOW";
     userId: number;
@@ -44,33 +71,3 @@ export type UsersReducerActionType =
     | SetCurrentPageActionType
     | SetTotalCountActionType
     | ToggleIsFetchingActionType;
-
-export const follow = (userId: number): UsersReducerActionType => ({
-    type: "FOLLOW",
-    userId,
-});
-
-export const unfollow = (userId: number): UsersReducerActionType => ({
-    type: "UNFOLLOW",
-    userId,
-});
-
-export const setUsers = (users: UserServerType[]): UsersReducerActionType => ({
-    type: "SET-USERS",
-    users,
-});
-
-export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => ({
-    type: "SET_CURRENT_PAGE",
-    pageNumber: pageNumber
-});
-
-export const setTotalCount = (totalCount: number): SetTotalCountActionType => ({
-    type: "SET-TOTAL-COUNT",
-    totalCount: totalCount
-})
-
-export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({
-    type: "TOGGLE-IS-FETCHING",
-    isFetching: isFetching
-})

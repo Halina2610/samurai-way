@@ -1,13 +1,24 @@
-import axios from "axios";
+import {instance} from "./utils/instance";
 
-const instance = axios.create({
-    baseURL: "https://social-network.samuraijs.com/api/1.0",
-    withCredentials: true,
-    headers: {
-        "API-KEY": "bdcfda08-91c6-49eb-9714-5d59d1951986",
+export const usersApi = {
+    getUsers(page: number = 1, count: number = 10, term: string = '', friend: boolean | undefined = undefined): Promise<UsersDomainType> {
+        const params = {
+            page,
+            count,
+            term,
+            friend
+        };
+
+        return instance.get('/users', { params })
+            .then(response => response.data);
     },
-});
+    getProfileUsers (userId: number) {
+        return instance.get<UserApiProfileResponse>(`/profile/${userId}`)
+    }
+};
 
+
+//types
 export type UserServerType = {
     id: number,
     name: string,
@@ -50,21 +61,3 @@ export type UsersDomainType = {
     isFetching: boolean,
 };
 
-
-
-export const usersApi = {
-    getUsers(page: number = 1, count: number = 10, term: string = '', friend: boolean | undefined = undefined): Promise<UsersDomainType> {
-        const params = {
-            page,
-            count,
-            term,
-            friend
-        };
-
-        return instance.get('/users', { params })
-            .then(response => response.data);
-    },
-    getProfileUsers (userId: number) {
-        return instance.get<UserApiProfileResponse>(`/profile/${userId}`)
-    }
-};

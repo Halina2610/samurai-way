@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store/store";
 import {Dispatch} from "redux";
 import {UserApiProfileResponse, usersApi} from "../../api/usersApi";
 import React, {Component} from "react";

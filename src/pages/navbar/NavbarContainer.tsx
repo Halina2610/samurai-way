@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {Navbar} from "./Navbar";
 import {sidebarPropsType} from "../../types";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store/store";
 
 
 type MapStatePropsType = {
