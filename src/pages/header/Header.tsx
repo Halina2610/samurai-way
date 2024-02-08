@@ -11,7 +11,7 @@ export const Header = () => {
             </div>
 
             <div className={s.loginBlock}>
-                <NavLink to="/login" activeClassName={s.activeLink}>
+                <NavLink to="/login" className={s.activeLink}>
                     Login
                 </NavLink>
             </div>

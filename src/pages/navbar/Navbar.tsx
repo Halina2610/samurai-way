@@ -14,7 +14,7 @@ export const Navbar: React.FC<NavbarPropsType> = (props: NavbarPropsType) => {
             <nav className={s.nav}>
                 {props.sidebar.menuItems.map((item, index) => (
                     <div key={index} className={s.item}>
-                        <NavLink to={item.path} activeClassName={s.activeLink}>
+                        <NavLink to={item.path} className={s.activeLink}>
                             {item.label}
                         </NavLink>
                     </div>

@@ -24,3 +24,8 @@
 .button:active {
     background-color: rgba(166, 97, 248, 0.8);
 }
+
+.button:disabled {
+    background-color: #CCCCCC;
+    cursor: not-allowed;
+}

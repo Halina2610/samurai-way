@@ -1,73 +1,40 @@
 import {UserServerType} from "../../api/usersAPI";
 
-export const follow = (userId: number): UsersReducerActionType => ({
+export const follow = (userId: number) => ({
     type: "FOLLOW",
     userId,
-});
-export const unfollow = (userId: number): UsersReducerActionType => ({
+} as const);
+export const unfollow = (userId: number) => ({
     type: "UNFOLLOW",
     userId,
-});
-export const setUsers = (users: UserServerType[]): UsersReducerActionType => ({
+}as const);
+export const setUsers = (users: UserServerType[]) => ({
     type: "SET-USERS",
     users,
-});
-export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => ({
+}as const);
+export const setCurrentPage = (pageNumber: number) => ({
     type: "SET_CURRENT_PAGE",
-    pageNumber: pageNumber
-});
-export const setTotalCount = (totalCount: number): SetTotalCountActionType => ({
+    pageNumber
+}as const);
+export const setTotalCount = (totalCount: number) => ({
     type: "SET-TOTAL-COUNT",
-    totalCount: totalCount
-})
-export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({
+    totalCount
+}as const)
+export const toggleIsFetching = (isFetching: boolean) => ({
     type: "TOGGLE-IS-FETCHING",
-    isFetching: isFetching
-})
+    isFetching
+}as const)
 
-
-
-//types
-type FollowActionType = {
-    type: "FOLLOW";
-    userId: number;
-};
-
-type UnfollowActionType = {
-    type: "UNFOLLOW";
-    userId: number;
-};
-
-type SetUsersActionType = {
-    type: "SET-USERS";
-    users: UserServerType[];
-};
-
-type FetchUsersActionType = {
-    type: "FETCH-USERS";
-}
-
-type SetCurrentPageActionType = {
-    type: "SET_CURRENT_PAGE";
-    pageNumber: number
-}
-
-type SetTotalCountActionType = {
-    type: "SET-TOTAL-COUNT"
-    totalCount: number
-}
-
-type ToggleIsFetchingActionType = {
-    type: "TOGGLE-IS-FETCHING"
-    isFetching: boolean
-}
+export const toggleFollowingProgress = (followingInProgress: boolean, id: number) => ({
+    type: 'TOGGLE-FOLLOWING-PROGRESS' as const, followingInProgress, id
+} as const)
 
 
 export type UsersReducerActionType =
-    | UnfollowActionType
-    | FollowActionType
-    | SetUsersActionType
-    | FetchUsersActionType
-    | SetCurrentPageActionType
-    | SetTotalCountActionType
-    | ToggleIsFetchingActionType;
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof  setUsers>
+    | ReturnType<typeof  setCurrentPage>
+    | ReturnType<typeof setTotalCount>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleFollowingProgress>

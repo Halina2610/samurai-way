@@ -66,7 +66,11 @@ export type UsersDomainType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 };
+
+
+
 
 type FollowType = {
     resultCode: number

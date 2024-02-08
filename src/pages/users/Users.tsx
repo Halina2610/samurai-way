@@ -7,28 +7,29 @@ import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     usersPage: UsersDomainType;
-    pageSize: number
-    totalCount: number
-    currentPage: number
+    pageSize: number;
+    totalCount: number;
+    currentPage: number;
+    isFetching: boolean;
+    followingInProgress: number[];
     follow: (userId: number) => void;
     unfollow: (userId: number) => void;
-    onPageChanged: (pageNumber: number) => void
-    isFetching: boolean
+    onPageChanged: (pageNumber: number) => void;
+    toggleIsFetching: (isFetching: boolean) => void;
+    toggleFollowingProgress: (followingInProgress: boolean, id: number) => void
 };
 
-
 export const Users = (props: UsersPropsType) => {
-
     const {items: users} = props.usersPage;
-    const pagesCount = Math.ceil(props.totalCount / props.pageSize)
-    let pages: number[] = []
+    const pagesCount = Math.ceil(props.totalCount / props.pageSize);
+    let pages: number[] = [];
     for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+        pages.push(i);
     }
 
     const onPageChanged = (p: number) => {
-        props.onPageChanged(p)
-    }
+        props.onPageChanged(p);
+    };
 
     return (
         <div className={s.wrapper}>
@@ -38,9 +39,8 @@ export const Users = (props: UsersPropsType) => {
                         return <span
                             className={props.currentPage === p ? s.selectedPage : ''}
                             onClick={() => {
-                                onPageChanged(p)
+                                onPageChanged(p);
                             }}
-
                         >{p}</span>;
                     })}
                 </div>
@@ -56,19 +56,36 @@ export const Users = (props: UsersPropsType) => {
                         </NavLink>
                         <div className={s.btn}>
                             {u.followed ? (
-                                <Button name={'Unfollow'} onClick={() => {
-                                    usersAPI.unFollowUser(u.id)
-                                    props.unfollow(u.id)
-                                }}/>
+                                <Button
+                                    name={'Unfollow'}
+                                    disabled={props.followingInProgress.includes(u.id)}  // Используйте followingInProgress для каждого пользователя
+                                    onClick={() => {
+                                        props.toggleFollowingProgress(true, u.id)
+                                        usersAPI.unFollowUser(u.id)
+                                            .then(res => {
+                                                if (res.data.resultCode === 0) {
+                                                    props.unfollow(u.id);
+                                                }
+                                                props.toggleFollowingProgress(false, u.id)
+                                            });
+                                    }}
+                                />
                             ) : (
-                                <Button name={'Follow'} onClick={() => {
-                                    usersAPI.followUser(u.id)
-                                        .then(res => {
-                                            if (res.data.resultCode === 0)
-                                                props.follow(u.id)
-                                        })
+                                <Button
+                                    name={'Follow'}
+                                    disabled={u.followingInProgress} // Используйте followingInProgress для каждого пользователя
+                                    onClick={() => {
+                                        props.toggleFollowingProgress(true, u.id)
 
-                                }}/>
+                                        usersAPI.followUser(u.id)
+                                            .then(res => {
+                                                if (res.data.resultCode === 0) {
+                                                    props.follow(u.id);
+                                                }
+                                                props.toggleFollowingProgress(false, u.id)
+                                            });
+                                    }}
+                                />
                             )}
                         </div>
                     </div>
@@ -81,5 +98,5 @@ export const Users = (props: UsersPropsType) => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};

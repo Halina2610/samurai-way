@@ -1,16 +1,14 @@
-import { UsersReducerActionType} from "../actions/actionsUsers";
-import {UsersDomainType} from "../../api/usersAPI";
-
+import { UsersReducerActionType } from "../actions/actionsUsers";
+import { UsersDomainType } from "../../api/usersAPI";
 
 const initialState: UsersDomainType = {
     items: [],
     totalCount: 0,
     isFetching: false,
     currentPage: 1,
-    pageSize: 100
+    pageSize: 100,
+    followingInProgress: []
 };
-
-
 
 export const usersReducer = (
     state: UsersDomainType = initialState,
@@ -42,25 +40,31 @@ export const usersReducer = (
         case "SET_CURRENT_PAGE":
             return {
                 ...state,
-                currentPage: action.pageNumber
-
+                currentPage: action.pageNumber,
             };
 
         case "SET-TOTAL-COUNT":
             return {
                 ...state,
-                totalCount: action.totalCount
+                totalCount: action.totalCount,
             };
 
         case "TOGGLE-IS-FETCHING":
             return {
                 ...state,
-                isFetching: action.isFetching
+                isFetching: action.isFetching,
+            };
+
+        case 'TOGGLE-FOLLOWING-PROGRESS':
+            return {
+                ...state,
+                followingInProgress:
+                    action.followingInProgress
+                        ? [...state.followingInProgress, action.id]
+                        : state.followingInProgress.filter(id => id !== action.id)
             }
 
         default:
             return state;
     }
 };
-
-
