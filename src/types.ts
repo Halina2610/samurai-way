@@ -25,20 +25,7 @@ export type PostsPropsType = {
     likeCount: number
     img: string
 }
-type FriendsPropsType = {
-    id: string
-    name: string
-    avatar: string
-}
 
-export type sidebarPropsType = {
-    friends: FriendsPropsType[]
-    menuItems: MenuItemType[]
-}
-export type  MenuItemType = {
-    path: string;
-    label: string;
-}
 
 export type ProfilePageType = {
     posts: PostsPropsType[]

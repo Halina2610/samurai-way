@@ -1,15 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import {MessagesPageType, MessagesPropsType} from "../../types";
 
-type AddMessageActionType = {
-    type: "ADD-MESSAGE";
-};
-
-type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT";
-    newMessage: string;
-};
-
 let initiationState: MessagesPageType =   {
         messages: [
             {id: uuidv4(), message: 'Hi, it\'s great to see you again!'},
@@ -26,9 +17,7 @@ let initiationState: MessagesPageType =   {
         ],
     }
 
-export type DialogsReducerActionType =
-    | AddMessageActionType
-    | UpdateNewMessageTextActionType;
+
 
 export const dialogsReducer = (
     state: MessagesPageType = initiationState,
@@ -55,9 +44,14 @@ export const dialogsReducer = (
     }
 };
 
-export const addMessageActionCreator = (): DialogsReducerActionType => ({type: "ADD-MESSAGE"});
+export const addMessageActionCreator = () => ({type: "ADD-MESSAGE"} as const);
 
-export const updateNewMessageTextActionCreator = (newMessage: string): DialogsReducerActionType => ({
+export const updateNewMessageTextActionCreator = (newMessage: string)=> ({
     type: "UPDATE-NEW-MESSAGE-TEXT",
     newMessage
-});
+}as const);
+
+//types
+export type DialogsReducerActionType =
+    | ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof updateNewMessageTextActionCreator>

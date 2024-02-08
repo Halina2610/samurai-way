@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { UsersAuthDataType } from "../../api/authApi";
+import {authApi, UsersAuthDataType} from "../../api/authApi";
+import {AppThankAction, AppThankDispatch} from "../store/store";
 
 const initiationState: AuthMeStateType = {
     id: 0,
@@ -30,17 +30,28 @@ export const authReducer = (
     }
 };
 
-export const setAuthUsersData = (data: UsersAuthDataType) => ({
-    type: "SET_AUTH_USERS_DATA",
-    data
-} as const);
+//thunk
 
-export const setIsAuth = (isAuth: boolean) => ({
-    type: "SET_IS_AUTH",
-    isAuth
-} as const);
+export const fetchMe = (): AppThankAction => {
+    return async (dispatch: AppThankDispatch)    => {
+        try {
+            const response = await authApi.getAuthMe();
+            dispatch(setAuthUsersData(response.data.data))
+            if (response.data.resultCode === 0)
+                dispatch(setIsAuth(true))
 
-// Types
+        } catch (error: any) {
+            console.log(error.message);
+        }
+    }
+}
+
+//actions
+export const setAuthUsersData = (data: UsersAuthDataType) => ({type: "SET_AUTH_USERS_DATA", data} as const);
+
+export const setIsAuth = (isAuth: boolean) => ({type: "SET_IS_AUTH", isAuth} as const);
+
+// types
 export type AuthMeStateType = UsersAuthDataType & {
     isAuth: boolean;
 };

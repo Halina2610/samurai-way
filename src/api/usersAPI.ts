@@ -1,7 +1,7 @@
 import {instance} from "./utils/instance";
 
 export const usersAPI = {
-    getUsers(page: number = 1, count: number = 10, term: string = '', friend: boolean | undefined = undefined): Promise<UsersDomainType> {
+    fetchUsers(page: number = 1, count: number = 10, term: string = '', friend: boolean | undefined = undefined): Promise<UsersDomainType> {
         const params = {
             page,
             count,
@@ -15,10 +15,10 @@ export const usersAPI = {
     getProfileUsers (userId: number) {
         return instance.get<UserApiProfileResponse>(`/profile/${userId}`)
     },
-    followUser(userId: number) {
+    follow(userId: number) {
         return instance.post<FollowType>(`/follow/${userId}`)
     },
-    unFollowUser(userId: number) {
+    unfollow(userId: number) {
         return instance.delete<FollowType>(`/follow/${userId}`)
     },
 };

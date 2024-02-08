@@ -1,10 +1,9 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store/store";
-import {Dispatch} from "redux";
-import {UserApiProfileResponse, usersAPI} from "../../api/usersAPI";
+import {UserApiProfileResponse} from "../../api/usersAPI";
 import React, {Component} from "react";
 import {Profile} from "./Profile";
-import {setUserProfileAC} from "../../redux/reducers/profileReducer";
+import {fetchUserProfile} from "../../redux/reducers/profileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type MapStatePropsType = {
@@ -12,30 +11,23 @@ type MapStatePropsType = {
 };
 
 type MapDispatchPropsType = {
-    setUserProfile: (profile: UserApiProfileResponse) => void;
+    fetchUserProfile: (userId: number | undefined) => void
 };
 
 type UsersPropsType = {
-    setUserProfile: (profile: UserApiProfileResponse) => void;
+    fetchUserProfile: (userId: number | undefined) => void
     profilePage: UserApiProfileResponse;
 } & RouteComponentProps<{ userId: string }>;
 
 export class ProfileComponent extends Component<UsersPropsType> {
 
-    componentDidMount = async () => {
-        let userId = this.props.match.params.userId
+    componentDidMount() {
+        let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = '30103'
+            userId = '30103';
         }
-        try {
-            const response = await usersAPI.getProfileUsers(+userId);
-
-            const userProfile = response.data;
-            this.props.setUserProfile(userProfile);
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    };
+        this.props.fetchUserProfile(+userId);
+    }
 
     render() {
         return (
@@ -52,15 +44,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 
-
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        setUserProfile: (profile: UserApiProfileResponse) => {
-            dispatch(setUserProfileAC(profile));
-        },
-    };
-};
-
 export const ProfileComponentWithRouter = withRouter(ProfileComponent);
 
 export const ProfileContainer = connect<
@@ -70,6 +53,6 @@ export const ProfileContainer = connect<
     AppStateType
 >(
     mapStateToProps,
-    mapDispatchToProps
+    {fetchUserProfile}
 )(ProfileComponentWithRouter);
 

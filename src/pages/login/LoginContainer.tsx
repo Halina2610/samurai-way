@@ -1,24 +1,14 @@
-import {authApi, UsersAuthDataType} from "../../api/authApi";
-import {AuthMeStateType, setAuthUsersData, setIsAuth} from "../../redux/reducers/authReducer";
+import {AuthMeStateType, fetchMe} from "../../redux/reducers/authReducer";
 import React, {Component} from "react";
 import {Login} from "./Login/Login";
 import {AppStateType} from "../../redux/store/store";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 
 
 export class LoginComponent extends Component<AuthMePropsType> {
 
     componentDidMount = async () => {
-        try {
-            const response = await authApi.getAuthMe();
-            this.props.setAuthUsersData(response.data.data);
-            if (response.data.resultCode === 0)
-                this.props.setIsAuth(true)
-
-        } catch (error: any) {
-            console.log(error.message);
-        }
+        this.props.fetchMe()
     };
 
     render() {
@@ -37,19 +27,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 
-
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        setAuthUsersData: (data: UsersAuthDataType) => {
-            dispatch(setAuthUsersData(data));
-        },
-        setIsAuth: (isAuth: boolean) => {
-            dispatch(setIsAuth(isAuth))
-        }
-    };
-};
-
-
 export const LoginContainer = connect<
     MapStatePropsType,
     MapDispatchPropsType,
@@ -57,7 +34,7 @@ export const LoginContainer = connect<
     AppStateType
 >(
     mapStateToProps,
-    mapDispatchToProps
+    {fetchMe}
 )(LoginComponent);
 
 //types
@@ -67,13 +44,12 @@ type MapStatePropsType = {
 };
 
 type MapDispatchPropsType = {
-    setAuthUsersData: (data: UsersAuthDataType) => void;
-    setIsAuth: (isAuth: boolean) => void;
+    fetchMe: () => void
+
 };
 
 type AuthMePropsType = {
-    setAuthUsersData: (data: UsersAuthDataType) => void;
     loginPage: AuthMeStateType;
-    setIsAuth: (isAuth: boolean) => void;
+    fetchMe: () => void
 }
 
