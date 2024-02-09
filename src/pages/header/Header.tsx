@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Header.module.css';
 import { NavLink } from "react-router-dom";
+import logo from "../../assets/images/logo.svg"
 
 export const Header = () => {
     return (
         <header className={s.header}>
             <div className={s.logocontainer}>
-                <img src="https://cdn-icons-png.flaticon.com/128/249/249385.png" alt="ligo" className={s.logo} />
-                <h3>Social Network</h3>
+                <img src={logo} alt="ligo" className={s.logo} />
+                <h3 className={s.h}>Social Network</h3>
             </div>
 
             <div className={s.loginBlock}>

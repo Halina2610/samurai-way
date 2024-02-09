@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120" height="120" viewBox="0 0 120 120">
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="30%" style="stop-color:rgba(115,0,255,0.8);" />
+            <stop offset="100%" style="stop-color:rgba(255,0,153, 0.3);" />
+        </linearGradient>
+        <rect id="roundedRect" width="120" height="120" rx="5" ry="5" />
+    </defs>
+    <use fill="url(#grad)" xlink:href="#roundedRect" />
+    <text x="35%" y="35%" font-size="70" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-weight="bold">S</text>
+    <text x="65%" y="65%" font-size="70" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-weight="bold">N</text>
+    <text x="95" y="105" font-size="28" fill="#ffff00">★</text>
+</svg>

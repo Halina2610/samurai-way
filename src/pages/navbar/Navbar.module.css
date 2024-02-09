@@ -2,30 +2,33 @@
     grid-area: n;
     height: calc(100vh - 60px);
     width: 205px;
-    background: linear-gradient(to right, rgba(115, 0, 255, 0.9), rgba(162, 76, 252, 0.1));
-    padding: 20px;
+    box-shadow: 0 0 0 5px rgba(115, 0, 255, 0.1);
+    background-image: linear-gradient(to right, rgba(115, 0, 255, 0.9), rgba(162, 76, 252, 0.1));
+    padding: 30px;
     border-radius: 5px;
     position: fixed;
     margin-top: 70px;
+    z-index: 10;
 }
 
 .nav {
+    margin: 20px;
 
 }
 
 .item a {
     text-decoration: none;
-    color: #abfff1;
+    color: #ffffff;
+    font-size: 1.3rem;
+
+    margin: 10px;
 }
 
 .item a:hover {
-    color: #f696c6;
+    color: rgb(215, 144, 239);
+    font-weight: 550;
 }
 
-.activeLinc {
-    color: aliceblue;
-    text-decoration: none;
-}
 
 .friends {
     display: flex;
