@@ -1,8 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {Button} from "../../components/common/button/Button";
-import {usersAPI, UsersDomainType, UserServerType} from "../../api/usersAPI";
-import userPhoto from '../../assets/images/user.png';
+import { UsersDomainType, UserServerType} from "../../api/usersAPI";
 import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
@@ -52,10 +51,12 @@ export const Users = (props: UsersPropsType) => {
                     <div className={s.avatar}>
                         <NavLink to={`/profile/${u.id}`}>
                             <img className={s.avatarImg}
-                                 src={u.photos.small != null ? u.photos.small : userPhoto}
+                                 src={u.photos.small != null ? u.photos.small : ''}
                                  alt="User Avatar"
                             />
                         </NavLink>
+
+
                         <div className={s.btn}>
                             {u.followed ? (
                                 <Button
@@ -73,6 +74,7 @@ export const Users = (props: UsersPropsType) => {
                                     onClick={() => {
                                         props.follow(u.id)
                                     }}
+
                                 />
                             )}
                         </div>
