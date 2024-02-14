@@ -4,7 +4,8 @@ import {UserApiProfileResponse} from "../../api/usersAPI";
 import React, {Component} from "react";
 import {Profile} from "./Profile";
 import {fetchUserProfile} from "../../redux/reducers/profileReducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import { RouteComponentProps, withRouter} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
     profilePage: UserApiProfileResponse;
@@ -31,7 +32,7 @@ export class ProfileComponent extends Component<UsersPropsType> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>
+
         return (
             <>
                 <Profile {...this.props} />
@@ -49,7 +50,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 export const ProfileComponentWithRouter = withRouter(ProfileComponent);
 
-export const ProfileContainer = connect<
+export const ProfileContainer = WithAuthRedirect(connect<
     MapStatePropsType,
     MapDispatchPropsType,
     {},
@@ -57,5 +58,5 @@ export const ProfileContainer = connect<
 >(
     mapStateToProps,
     {fetchUserProfile}
-)(ProfileComponentWithRouter);
+)(ProfileComponentWithRouter));
 
