@@ -4,10 +4,10 @@ import {ProfileInfo} from "./profileInfo/ProfileInfo";
 import {UserApiProfileResponse} from "../../api/usersAPI"
 import {Preloader} from "../../components/common/preloader/Preloader";
 import {MyPostsContainer} from "./myPosts/MyPostsContainer";
+import {Redirect} from "react-router-dom";
 
 type PropsType = {
     profilePage: UserApiProfileResponse;
-
 
 }
 

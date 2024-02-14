@@ -5,6 +5,7 @@ export const authApi = {
     getAuthMe() {
         return instance.get<AuthMeType>(`/auth/me/`)
     }
+
 };
 
 

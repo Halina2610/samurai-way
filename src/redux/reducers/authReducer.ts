@@ -32,7 +32,7 @@ export const authReducer = (
 
 //thunk
 
-export const fetchMe = (): AppThankAction => {
+export const getAuthUserData = (): AppThankAction => {
     return async (dispatch: AppThankDispatch)    => {
         try {
             const response = await authApi.getAuthMe();

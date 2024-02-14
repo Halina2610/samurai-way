@@ -1,4 +1,4 @@
-import {AuthMeStateType, fetchMe} from "../../redux/reducers/authReducer";
+import {AuthMeStateType, getAuthUserData} from "../../redux/reducers/authReducer";
 import React, {Component} from "react";
 import {Login} from "./Login";
 import {AppStateType} from "../../redux/store/store";
@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 export class LoginComponent extends Component<AuthMePropsType> {
 
     componentDidMount = async () => {
-        this.props.fetchMe()
+        this.props.getAuthUserData()
     };
 
     render() {
@@ -34,7 +34,7 @@ export const LoginContainer = connect<
     AppStateType
 >(
     mapStateToProps,
-    {fetchMe}
+    {getAuthUserData}
 )(LoginComponent);
 
 //types
@@ -44,12 +44,12 @@ type MapStatePropsType = {
 };
 
 type MapDispatchPropsType = {
-    fetchMe: () => void
+    getAuthUserData: () => void
 
 };
 
 type AuthMePropsType = {
     loginPage: AuthMeStateType;
-    fetchMe: () => void
+    getAuthUserData: () => void
 }
 
