@@ -31,34 +31,3 @@ const mapDispatchToProps = (dispatch: Dispatch ):mapDispatchPropsType => {
 }
 
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-
-/*type DialogsPropsType = {
-  //  store: StoreType;
-};*/
-
-/*export const DialogsContainer = (props: DialogsPropsType) => {
-    return (
-        <div>
-            <StoreContext.Consumer>
-                {(store) => {
-                    let state = store.getState();
-                    const addMessage = () => {
-                        store.dispatch(addMessageActionCreator());
-                    };
-
-                    const onMessageChange = (newMessage: string) => {
-                        store.dispatch(updateNewMessageTextActionCreator(newMessage));
-                    };
-
-                    return (
-                        <Dialogs
-                            messagesPage={state.messagesPage}
-                            addMessage={addMessage}
-                            updateNewMessageText={onMessageChange}
-                        />
-                    );
-                }}
-            </StoreContext.Consumer>
-        </div>
-    );
-};*/

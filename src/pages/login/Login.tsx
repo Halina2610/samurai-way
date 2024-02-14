@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthMeStateType } from "../../../redux/reducers/authReducer";
+import { AuthMeStateType } from "../../redux/reducers/authReducer";
 
 type LoginPropsType = {
     loginPage: AuthMeStateType;

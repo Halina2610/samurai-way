@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import {Button} from "../../components/common/button/Button";
 import { UsersDomainType, UserServerType} from "../../api/usersAPI";
 import {NavLink} from "react-router-dom";
+import avatar from '../../assets/images/avatar.svg'
 
 type UsersPropsType = {
     usersPage: UsersDomainType;
@@ -51,7 +52,7 @@ export const Users = (props: UsersPropsType) => {
                     <div className={s.avatar}>
                         <NavLink to={`/profile/${u.id}`}>
                             <img className={s.avatarImg}
-                                 src={u.photos.small != null ? u.photos.small : ''}
+                                 src={u.photos.small != null ? u.photos.small : avatar}
                                  alt="User Avatar"
                             />
                         </NavLink>

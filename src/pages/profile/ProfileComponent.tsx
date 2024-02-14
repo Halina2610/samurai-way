@@ -11,11 +11,11 @@ type MapStatePropsType = {
 };
 
 type MapDispatchPropsType = {
-    fetchUserProfile: (userId: number | undefined) => void
+    fetchUserProfile: (userId: number) => void
 };
 
 type UsersPropsType = {
-    fetchUserProfile: (userId: number | undefined) => void
+    fetchUserProfile: (userId: number) => void
     profilePage: UserApiProfileResponse;
 } & RouteComponentProps<{ userId: string }>;
 

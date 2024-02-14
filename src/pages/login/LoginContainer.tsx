@@ -1,6 +1,6 @@
 import {AuthMeStateType, fetchMe} from "../../redux/reducers/authReducer";
 import React, {Component} from "react";
-import {Login} from "./Login/Login";
+import {Login} from "./Login";
 import {AppStateType} from "../../redux/store/store";
 import {connect} from "react-redux";
 
