@@ -5,12 +5,12 @@ import { Header } from './pages/header/Header';
 import { News } from './pages/news/News';
 import { Music } from './pages/music/Music';
 import { Settings } from './pages/settings/Settings';
-import { DialogsContainer } from "./pages/dialogs/DialogsContainer";
 import { NavbarContainer } from "./pages/navbar/NavbarContainer";
 import { UsersContainer } from "./pages/users/UsersContainer";
-import { ProfileContainer } from "./pages/profile/ProfileComponent";
+import  ProfileComponent from "./pages/profile/ProfileComponent";
 import { LoginContainer } from "./pages/login/LoginContainer";
 import { Footer } from './pages/footer/Footer';
+import DialogsContainer from "./pages/dialogs/DialogsContainer";
 
 function App() {
     const userId = '';
@@ -26,7 +26,7 @@ function App() {
                         <Route exact path="/">
                             {userId ? <Redirect to={`/profile/${userId}`} /> : <Redirect to="/profile" />}
                         </Route>
-                        <Route path="/profile/:userId?" component={ProfileContainer} />
+                        <Route path="/profile/:userId?" component={ProfileComponent} />
                         <Route path="/dialogs" component={DialogsContainer} />
                         <Route path="/news" component={News} />
                         <Route path="/music" component={Music} />
